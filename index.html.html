@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>VACEI — Partner & Reseller Programme</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+/* ─── VACEI BRAND TOKENS (matched to vacei.com) ─── */
+:root {
+  --bg:        #070A12;
+  --bg2:       #0C1020;
+  --bg3:       #111827;
+  --surface:   rgba(255,255,255,0.04);
+  --border:    rgba(255,255,255,0.08);
+  --border-s:  rgba(255,255,255,0.05);
+  --light:     #F7F6F3;
+  --light2:    #EDECEA;
+  --light3:    #E2E0DC;
+  --blue:      #2451FF;
+  --blue-s:    #4B6FFF;
+  --blue-pale: rgba(36,81,255,0.12);
+  --blue-glow: rgba(36,81,255,0.18);
+  --blue-dim:  rgba(36,81,255,0.08);
+  --text-h:    #FFFFFF;
+  --text-b:    #CBD5E0;
+  --text-m:    #8896A8;
+  --text-d:    #4A5568;
+  --green:     #22C55E;
+  --green-bg:  rgba(34,197,94,0.1);
+  --green-bd:  rgba(34,197,94,0.2);
+  --red:       #F87171;
+  --serif: 'DM Serif Display', Georgia, serif;
+  --sans:  'Sora', system-ui, sans-serif;
+  --ease:  cubic-bezier(0.4,0,0.2,1);
+  --r:     12px;
+  --r-lg:  16px;
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0 }
+html { font-size:16px }
+body { font-family:var(--sans); background:var(--bg); overflow-x:hidden; overflow-y:auto; min-height:100vh; min-height:100dvh; width:100%; -webkit-font-smoothing:antialiased; color:var(--text-h) }
+
+/* ── SLIDE ENGINE ── */
+.deck { position:relative; width:100%; min-height:100vh; min-height:100dvh; overflow:visible }
+.slide { position:relative; display:none; flex-direction:column; min-height:100vh; min-height:100dvh; pointer-events:none; overflow:visible; background:var(--bg) }
+.slide.active { display:flex; pointer-events:all; padding-bottom:calc(2.4rem + env(safe-area-inset-bottom, 0px)) }
+.slide.exit-left { }
+.slide.light { background:var(--light); color:var(--text-d) }
+
+/* noise */
+.slide::after { content:''; position:absolute; inset:0; z-index:0; pointer-events:none; opacity:.55;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E") }
+.slide.light::after { opacity:.25 }
+
+/* grid */
+.grid-bg { position:absolute; inset:0; z-index:1; pointer-events:none;
+  background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-size:56px 56px }
+
+/* orbs */
+.orb { position:absolute; border-radius:50%; pointer-events:none; filter:blur(90px) }
+
+/* ── LAYOUT ── */
+.s-inner { position:relative; z-index:2; flex:1; min-height:0; display:flex; flex-direction:column; justify-content:center; padding:clamp(.5rem,1.5vh,1rem) 8vw; max-width:1280px; margin:0 auto; width:100%; overflow:visible }
+.s-inner.content-start { justify-content:flex-start; padding-top:.75rem; padding-bottom:1rem }
+@supports (justify-content: safe center) { .s-inner:not(.content-start) { justify-content: safe center } }
+.s-inner.center { align-items:center; text-align:center }
+.s-inner.split { display:grid; grid-template-columns:1fr 1fr; gap:5vw; align-items:center }
+.s-inner.split-wide { display:grid; grid-template-columns:1fr 1.4fr; gap:5vw; align-items:start }
+
+/* ── HEADER ── */
+.s-header { position:sticky; top:0; z-index:10; display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1.05rem 8vw; border-bottom:1px solid var(--border-s); flex-shrink:0; background:var(--bg); isolation:isolate }
+.slide.light .s-header { border-bottom-color:rgba(0,0,0,0.07); background:var(--light) }
+.logo-lockup { display:flex; align-items:center; gap:.55rem; flex-shrink:0 }
+.logo-img { height:40px; width:auto; display:block }
+.logo-wm { font-family:var(--sans); font-size:1.1rem; font-weight:800; letter-spacing:.08em; color:var(--text-h) }
+.logo-wm .dot { color:var(--blue) }
+.slide.light .logo-wm { color:var(--text-d) }
+
+/* slide tags — VACEI uses pill badges */
+.slide-tag { font-size:.64rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; padding:.28rem .85rem; border-radius:20px; background:var(--blue-dim); color:var(--blue-s); border:1px solid rgba(75,111,255,0.25); flex-shrink:0 }
+.slide.light .slide-tag { background:rgba(36,81,255,0.07); color:var(--blue); border-color:rgba(36,81,255,0.2) }
+
+/* ── FOOTER ── */
+.s-footer { position:relative; z-index:10; display:flex; align-items:center; justify-content:space-between; padding:.12rem 8vw; min-height:0; line-height:1.15; border-top:1px solid var(--border-s); flex-shrink:0; font-size:.56rem; color:var(--text-m); background:var(--bg); isolation:isolate }
+.slide.light .s-footer { border-top-color:rgba(0,0,0,0.06); color:var(--text-d); background:var(--light) }
+
+/* ── TYPE ── */
+.eyebrow { font-size:.66rem; font-weight:700; letter-spacing:.2em; text-transform:uppercase; color:var(--blue-s); margin-bottom:.9rem; display:flex; align-items:center; gap:.55rem }
+.eyebrow::before { content:''; display:inline-block; width:18px; height:1.5px; background:var(--blue-s) }
+.slide.light .eyebrow { color:var(--blue) }
+.slide.light .eyebrow::before { background:var(--blue) }
+h1.ht { font-family:var(--serif); font-size:clamp(2.6rem,4.8vw,4.5rem); line-height:1.07; letter-spacing:-.01em; color:var(--text-h); margin-bottom:1.2rem }
+h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-height:1.1; letter-spacing:-.01em; margin-bottom:.9rem; color:var(--text-h) }
+.slide.light h2.st { color:var(--text-d) }
+.accent { color:var(--blue-s) }
+.slide.light .accent { color:var(--blue) }
+.lead { font-size:clamp(.9rem,1.3vw,1.06rem); font-weight:300; line-height:1.72; color:var(--text-b); max-width:520px }
+.slide.light .lead { color:var(--text-d) }
+
+/* ── VACEI BADGE (matches site "Join the Future" pill) ── */
+.site-badge { display:inline-flex; align-items:center; gap:.5rem; border:1px solid var(--border); border-radius:20px; padding:.3rem 1rem; font-size:.72rem; font-weight:500; color:rgba(255,255,255,.55); background:rgba(255,255,255,.03); margin-bottom:1.4rem }
+.pulse { width:7px; height:7px; border-radius:50%; background:var(--green); animation:pulse 2s infinite }
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)} 50%{box-shadow:0 0 0 6px rgba(34,197,94,0)} }
+
+/* ── BUTTONS (matches vacei.com CTA style) ── */
+.btn-p { display:inline-flex; align-items:center; gap:.45rem; background:var(--blue); color:#fff; font-family:var(--sans); font-size:.84rem; font-weight:700; padding:.78rem 1.75rem; border-radius:8px; text-decoration:none; border:none; cursor:pointer; transition:background .2s,transform .2s }
+.btn-p:hover { background:var(--blue-s); transform:translateY(-2px) }
+.btn-g { display:inline-flex; align-items:center; gap:.45rem; border:1.5px solid var(--border); color:var(--text-h); font-family:var(--sans); font-size:.84rem; font-weight:500; padding:.78rem 1.75rem; border-radius:8px; text-decoration:none; background:transparent; cursor:pointer; transition:border-color .2s,transform .2s }
+.btn-g:hover { border-color:var(--blue-s); transform:translateY(-2px) }
+.btn-row { display:flex; gap:.85rem; flex-wrap:wrap; margin-top:1.75rem }
+.btn-row.center { justify-content:center }
+
+/* ── STAT ROW ── */
+.stats { display:flex; gap:2.5rem; flex-wrap:wrap; margin-top:2.5rem; padding-top:2rem; border-top:1px solid var(--border-s) }
+.stat strong { display:block; font-family:var(--serif); font-size:1.85rem; color:var(--text-h); letter-spacing:-.02em }
+.stat span { font-size:.74rem; color:var(--text-m); margin-top:.1rem; display:block }
+
+/* ── WORKSPACE CARD (vacei.com visual language) ── */
+.workspace-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden }
+.wc-header { background:var(--bg2); padding:.75rem 1rem; display:flex; align-items:center; gap:.5rem; border-bottom:1px solid var(--border-s) }
+.wc-dot { width:9px; height:9px; border-radius:50% }
+.wc-dot.r{background:#FF5F57} .wc-dot.y{background:#94A3B8} .wc-dot.g{background:#28C840}
+.wc-title { margin-left:.5rem; font-size:.66rem; color:var(--text-m); font-family:monospace }
+.wc-body { padding:1.1rem }
+
+/* ── PORTAL COMPARE ── */
+.portal-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-top:1.5rem }
+.portal-card { border-radius:var(--r-lg); padding:1.6rem; border:1px solid; position:relative; overflow:hidden }
+.portal-card::before { content:''; position:absolute; top:-50px; right:-50px; width:150px; height:150px; border-radius:50%; pointer-events:none }
+.portal-card.partner { background:rgba(36,81,255,0.06); border-color:rgba(36,81,255,0.25) }
+.portal-card.partner::before { background:radial-gradient(circle,rgba(36,81,255,0.18),transparent 70%) }
+.portal-card.client { background:rgba(34,197,94,0.05); border-color:rgba(34,197,94,0.2) }
+.portal-card.client::before { background:radial-gradient(circle,rgba(34,197,94,0.12),transparent 70%) }
+.pc-label { font-size:.6rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; padding:.22rem .7rem; border-radius:20px; margin-bottom:.85rem; display:inline-block }
+.pc-label.blue { background:var(--blue-pale); color:var(--blue-s); border:1px solid rgba(75,111,255,0.25) }
+.pc-label.green { background:var(--green-bg); color:var(--green); border:1px solid var(--green-bd) }
+.portal-card h3 { font-size:1rem; font-weight:700; color:var(--text-h); margin-bottom:.2rem }
+.portal-card .sub { font-size:.72rem; color:var(--text-m); margin-bottom:1rem; font-style:italic }
+.pc-items { display:flex; flex-direction:column; gap:.5rem }
+.pc-item { font-size:.78rem; color:var(--text-b); display:flex; align-items:flex-start; gap:.55rem; line-height:1.5 }
+.pc-item::before { content:'✓'; flex-shrink:0; font-weight:700; margin-top:.05rem }
+.portal-card.partner .pc-item::before { color:var(--blue-s) }
+.portal-card.client .pc-item::before { color:var(--green) }
+.portal-divider { margin-top:1.25rem; display:flex; align-items:center; gap:.75rem }
+.portal-divider::before,.portal-divider::after { content:''; flex:1; height:1px; background:var(--border-s) }
+.portal-divider span { font-size:.76rem; font-weight:600; color:var(--text-m); white-space:nowrap }
+
+/* ── INSIGHT CARDS ── */
+.insight-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; margin-top:1.5rem }
+.ic { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); padding:1.5rem; transition:border-color .2s,transform .2s }
+.ic:hover { border-color:rgba(75,111,255,0.35); transform:translateY(-3px) }
+.ic-icon { font-size:1.5rem; margin-bottom:.7rem }
+.ic-tag { font-size:.58rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; color:var(--blue-s); margin-bottom:.5rem; display:block }
+.ic h3 { font-size:.9rem; font-weight:700; color:var(--text-h); margin-bottom:.3rem }
+.ic p { font-size:.78rem; color:var(--text-m); line-height:1.6 }
+.insight-cta { margin-top:1.5rem; padding:1rem 1.4rem; background:var(--blue-dim); border:1px solid rgba(36,81,255,0.2); border-radius:var(--r); display:flex; align-items:center; gap:.7rem }
+.insight-cta p { font-size:.86rem; font-weight:600; color:var(--text-h) }
+
+/* ── MODEL CARDS ── */
+.model-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.25rem; margin-top:1.5rem }
+.model-card { border-radius:var(--r-lg); padding:1.75rem; border:1px solid; position:relative; overflow:hidden; transition:transform .25s }
+.model-card:hover { transform:translateY(-3px) }
+.model-card.ref { background:rgba(34,197,94,0.04); border-color:rgba(34,197,94,0.2) }
+.model-card.wl  { background:var(--blue-dim); border-color:rgba(36,81,255,0.25) }
+.model-card::before { content:''; position:absolute; top:-50px; right:-50px; width:160px; height:160px; border-radius:50%; pointer-events:none }
+.model-card.ref::before { background:radial-gradient(circle,rgba(34,197,94,0.1),transparent 70%) }
+.model-card.wl::before  { background:radial-gradient(circle,rgba(36,81,255,0.15),transparent 70%) }
+.mc-badge { font-size:.58rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; padding:.22rem .7rem; border-radius:20px; margin-bottom:.9rem; display:inline-block }
+.mc-badge.green { background:var(--green-bg); color:var(--green); border:1px solid var(--green-bd) }
+.mc-badge.blue  { background:var(--blue-pale); color:var(--blue-s); border:1px solid rgba(75,111,255,0.25) }
+.model-card h3 { font-family:var(--serif); font-size:1.25rem; color:var(--text-h); margin-bottom:.3rem }
+.model-card .desc { font-size:.8rem; color:var(--text-m); line-height:1.6; margin-bottom:1.1rem }
+.mc-steps { display:flex; flex-direction:column; gap:.5rem; margin-bottom:1.1rem }
+.mc-step { display:flex; align-items:flex-start; gap:.6rem; font-size:.8rem; color:var(--text-b); line-height:1.5 }
+.mc-n { flex-shrink:0; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:.6rem; font-weight:700; margin-top:.05rem }
+.model-card.ref .mc-n { background:rgba(34,197,94,0.12); color:var(--green); border:1px solid var(--green-bd) }
+.model-card.wl  .mc-n { background:var(--blue-pale); color:var(--blue-s); border:1px solid rgba(75,111,255,0.25) }
+.mc-ticks { display:flex; flex-direction:column; gap:.35rem }
+.mc-tick { font-size:.76rem; display:flex; align-items:center; gap:.5rem; color:var(--text-b) }
+.mc-tick::before { content:'✔'; font-weight:700; flex-shrink:0 }
+.model-card.ref .mc-tick::before { color:var(--green) }
+.model-card.wl  .mc-tick::before { color:var(--blue-s) }
+.mc-hl { margin-top:1.1rem; padding:.8rem 1rem; border-radius:8px; font-size:.78rem; font-weight:600; text-align:center }
+.model-card.ref .mc-hl { background:var(--green-bg); color:var(--green); border:1px solid var(--green-bd) }
+.model-card.wl  .mc-hl { background:var(--blue-pale); color:var(--blue-s); border:1px solid rgba(75,111,255,0.25) }
+
+/* ── SERVICE PILLS ── */
+.svc-pills { display:flex; flex-wrap:wrap; gap:.55rem; margin:1.25rem 0 }
+.svc-pill { font-size:.76rem; font-weight:600; padding:.38rem 1rem; border-radius:20px; border:1px solid var(--border); color:var(--text-b); background:var(--surface); transition:border-color .2s,color .2s,background .2s; cursor:default }
+.svc-pill:hover { border-color:rgba(75,111,255,0.4); color:var(--blue-s); background:var(--blue-dim) }
+.no-build { display:grid; grid-template-columns:repeat(3,1fr); gap:.85rem; margin-top:1.25rem }
+.nb { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); padding:1.25rem; text-align:center }
+.nb .ico { font-size:1.4rem; margin-bottom:.55rem }
+.nb h4 { font-size:.84rem; font-weight:700; color:var(--text-h); margin-bottom:.2rem }
+.nb p { font-size:.74rem; color:var(--text-m); line-height:1.5 }
+
+/* ── LIVE BOOKKEEPING DASHBOARD (NEW SLIDE) ── */
+.bk-dash { background:var(--bg2); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden }
+.bk-topbar { background:#0d1120; padding:.65rem 1rem; display:flex; align-items:center; gap:.5rem; border-bottom:1px solid var(--border-s) }
+.bk-dot { width:9px; height:9px; border-radius:50% }
+.bk-dot.r{background:#FF5F57} .bk-dot.y{background:#94A3B8} .bk-dot.g{background:#28C840}
+.bk-url { margin-left:.55rem; background:rgba(0,0,0,.3); border-radius:5px; padding:.18rem .75rem; font-size:.66rem; color:var(--text-m); font-family:monospace; flex:1 }
+.bk-status { font-size:.6rem; font-weight:700; color:var(--green); display:flex; align-items:center; gap:.35rem }
+.bk-status::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--green); display:inline-block }
+.bk-tabs { display:flex; background:#0d1120; border-bottom:1px solid var(--border-s) }
+.bk-tab { padding:.55rem .95rem; font-size:.66rem; font-weight:600; letter-spacing:.05em; color:var(--text-m); cursor:pointer; border-bottom:2px solid transparent; transition:color .2s,border-color .2s; white-space:nowrap }
+.bk-tab:hover { color:rgba(255,255,255,.7) }
+.bk-tab.on { color:var(--blue-s); border-bottom-color:var(--blue-s) }
+.bk-content { padding:1rem }
+.bk-panel { display:none }
+.bk-panel.on { display:block }
+
+/* overview panel */
+.money-cards { display:grid; grid-template-columns:repeat(2,1fr); gap:.65rem; margin-bottom:.85rem }
+.money-card { border-radius:10px; padding:.85rem 1rem; border:1px solid; position:relative; overflow:hidden; transition:border-color .2s }
+.money-card.in  { background:rgba(34,197,94,0.05); border-color:rgba(34,197,94,0.18) }
+.money-card.out { background:rgba(248,113,113,0.05); border-color:rgba(248,113,113,0.18) }
+.money-card.bal { background:var(--blue-dim); border-color:rgba(36,81,255,0.2) }
+.money-card.due { background:var(--blue-dim); border-color:rgba(36,81,255,0.22) }
+.money-card:hover { border-color:rgba(75,111,255,0.4) }
+.mc-lbl { font-size:.58rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text-m); margin-bottom:.3rem; display:flex; align-items:center; gap:.4rem }
+.mc-val { font-family:var(--serif); font-size:1.35rem; color:var(--text-h); margin-bottom:.15rem }
+.mc-sub { font-size:.62rem; color:var(--text-m) }
+.mc-sub.up { color:var(--green) }
+.mc-sub.dn { color:var(--red) }
+.mc-sub.am { color:var(--blue-s) }
+
+/* mini charts */
+.mini-row { display:grid; grid-template-columns:1.5fr 1fr; gap:.65rem }
+.mini-panel { background:rgba(255,255,255,.02); border:1px solid var(--border-s); border-radius:9px; padding:.85rem }
+.mp-title { font-size:.6rem; font-weight:700; text-transform:uppercase; letter-spacing:.1em; color:var(--text-m); margin-bottom:.65rem }
+.bar-chart { display:flex; align-items:flex-end; gap:3px; height:48px; margin-bottom:.35rem }
+.b { flex:1; border-radius:2px 2px 0 0; transition:opacity .2s; cursor:default }
+.b:hover { opacity:.8 }
+.b.inc { background:rgba(34,197,94,0.5) }
+.b.exp { background:rgba(248,113,113,0.4) }
+.b.hl  { background:var(--blue-s) }
+.bleg { font-size:.6rem; color:var(--text-m) }
+
+/* transaction rows */
+.txn-row { display:flex; align-items:center; justify-content:space-between; padding:.42rem .3rem; border-bottom:1px solid var(--border-s); font-size:.7rem; transition:background .15s; cursor:default; border-radius:5px }
+.txn-row:last-child { border-bottom:none }
+.txn-row:hover { background:rgba(255,255,255,.03) }
+.txn-name { color:var(--text-h); font-weight:600; flex:1 }
+.txn-cat  { font-size:.6rem; color:var(--text-m); margin-left:.5rem }
+.txn-date { font-size:.6rem; color:var(--text-m); margin:0 .5rem }
+.txn-amt  { font-weight:700 }
+.txn-amt.in  { color:var(--green) }
+.txn-amt.out { color:var(--red) }
+.txn-badge { font-size:.56rem; font-weight:700; padding:.1rem .4rem; border-radius:4px; margin-left:.5rem }
+.txn-badge.posted  { background:rgba(34,197,94,.12); color:var(--green) }
+.txn-badge.pending { background:rgba(36,81,255,.12); color:var(--blue-s) }
+
+/* owed to / owe panels */
+.owed-grid { display:grid; grid-template-columns:1fr 1fr; gap:.65rem }
+.owed-panel { background:rgba(255,255,255,.02); border:1px solid var(--border-s); border-radius:9px; padding:.85rem }
+.owed-row { display:flex; align-items:center; justify-content:space-between; padding:.42rem 0; border-bottom:1px solid var(--border-s); font-size:.7rem }
+.owed-row:last-child { border-bottom:none }
+.owed-name { color:var(--text-h); font-weight:600 }
+.owed-due  { font-size:.6rem; color:var(--text-m) }
+.owed-amt  { font-weight:700 }
+.owed-amt.in  { color:var(--green) }
+.owed-amt.out { color:var(--red) }
+.owed-status { font-size:.56rem; font-weight:700; padding:.1rem .4rem; border-radius:4px; margin-left:.45rem }
+.owed-status.overdue  { background:rgba(248,113,113,.12); color:var(--red) }
+.owed-status.due-soon { background:rgba(36,81,255,.12); color:var(--blue-s) }
+.owed-status.on-track { background:rgba(34,197,94,.12); color:var(--green) }
+
+/* accounts panel */
+.acc-row { display:flex; align-items:center; gap:.75rem; padding:.5rem .3rem; border-bottom:1px solid var(--border-s); font-size:.7rem; cursor:default }
+.acc-row:last-child { border-bottom:none }
+.acc-icon { width:28px; height:28px; border-radius:7px; display:flex; align-items:center; justify-content:center; font-size:.8rem; flex-shrink:0 }
+.acc-name { color:var(--text-h); font-weight:600; flex:1 }
+.acc-bank { font-size:.6rem; color:var(--text-m) }
+.acc-bal  { font-weight:700; color:var(--text-h) }
+.acc-chg  { font-size:.6rem; margin-left:.4rem }
+
+/* ── PROCESS STEPS ── */
+.proc-row { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:1.75rem; position:relative }
+.proc-row::before { content:''; position:absolute; top:25px; left:10%; right:10%; height:1px; background:linear-gradient(90deg,transparent,rgba(75,111,255,0.4),rgba(75,111,255,0.4),transparent) }
+.proc-step { text-align:center; padding:0 .6rem }
+.proc-n { width:50px; height:50px; border-radius:50%; background:var(--bg2); border:1.5px solid rgba(75,111,255,0.45); display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:1.05rem; color:var(--blue-s); margin:0 auto 1.25rem; position:relative; z-index:2 }
+.proc-step h3 { font-size:.82rem; font-weight:700; color:var(--text-h); margin-bottom:.3rem }
+.proc-step p { font-size:.74rem; color:var(--text-m); line-height:1.55 }
+.proc-cta { margin-top:1.5rem; padding:1rem 1.4rem; background:var(--blue-dim); border:1px solid rgba(36,81,255,0.2); border-radius:var(--r); text-align:center }
+.proc-cta p { font-size:.86rem; font-weight:600; color:var(--text-h) }
+
+/* ── BENEFITS ── */
+.ben-list { display:flex; flex-direction:column; gap:.7rem; margin-top:1.3rem }
+.ben-item { display:flex; align-items:flex-start; gap:.9rem; background:var(--surface); border:1px solid var(--border); border-radius:var(--r); padding:1rem 1.2rem; transition:border-color .2s }
+.ben-item:hover { border-color:rgba(75,111,255,0.3) }
+.ben-ico { font-size:1.1rem; flex-shrink:0; margin-top:.05rem; width:32px; text-align:center }
+.ben-text h4 { font-size:.85rem; font-weight:700; color:var(--text-h); margin-bottom:.15rem }
+.ben-text p { font-size:.76rem; color:var(--text-m); line-height:1.55 }
+.ben-cta { margin-top:1rem; padding:.9rem 1.2rem; background:var(--blue-dim); border:1px solid rgba(36,81,255,0.2); border-radius:var(--r) }
+.ben-cta p { font-size:.84rem; font-weight:600; color:var(--text-h) }
+
+/* ── USE CASES ── */
+.uc-grid { display:grid; grid-template-columns:1fr 1fr; gap:.9rem; margin-top:1.5rem }
+.uc { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); padding:1.25rem; display:flex; align-items:flex-start; gap:.85rem; transition:border-color .2s }
+.uc:hover { border-color:rgba(75,111,255,0.3) }
+.uc-ico { font-size:1.25rem; flex-shrink:0; margin-top:.05rem }
+.uc h4 { font-size:.86rem; font-weight:700; color:var(--text-h); margin-bottom:.2rem }
+.uc p { font-size:.76rem; color:var(--text-m); line-height:1.55 }
+.uc-cta { grid-column:span 2; background:var(--blue-dim); border:1px solid rgba(36,81,255,0.2); border-radius:var(--r); padding:1rem 1.3rem; display:flex; align-items:center; gap:.7rem }
+.uc-cta p { font-size:.86rem; font-weight:600; color:var(--text-h) }
+.uc-cta .arr { color:var(--blue-s) }
+
+/* ── CTA CARD ── */
+.cta-box { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:2.75rem 3.25rem; max-width:680px; text-align:center; position:relative; overflow:hidden; margin:0 auto }
+.cta-box::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(36,81,255,0.14),transparent 70%); pointer-events:none }
+.cta-opts { display:grid; grid-template-columns:1fr 1fr; gap:.85rem; margin:1.25rem 0 }
+.cta-opt { padding:1rem 1.15rem; border-radius:var(--r); text-align:left }
+.cta-opt.green { background:var(--green-bg); border:1px solid var(--green-bd) }
+.cta-opt.blue  { background:var(--blue-pale); border:1px solid rgba(75,111,255,0.25) }
+.cta-opt .lbl { font-size:.6rem; font-weight:700; letter-spacing:.14em; text-transform:uppercase; margin-bottom:.4rem }
+.cta-opt.green .lbl { color:var(--green) }
+.cta-opt.blue  .lbl { color:var(--blue-s) }
+.cta-opt p { font-size:.78rem; color:var(--text-b); line-height:1.55 }
+.cta-contact { display:flex; justify-content:center; gap:2rem; flex-wrap:wrap; margin-top:1.5rem; padding-top:1.5rem; border-top:1px solid var(--border-s) }
+.cta-contact a { font-size:.78rem; color:var(--text-m); text-decoration:none; display:flex; align-items:center; gap:.4rem; transition:color .2s }
+.cta-contact a:hover { color:var(--text-h) }
+
+/* ── ANIMATIONS ── */
+.fi  {animation:fi .6s var(--ease) both}
+.fi1 {animation:fi .6s .1s var(--ease) both}
+.fi2 {animation:fi .6s .2s var(--ease) both}
+.fi3 {animation:fi .6s .32s var(--ease) both}
+.fi4 {animation:fi .6s .44s var(--ease) both}
+.fi5 {animation:fi .6s .56s var(--ease) both}
+@keyframes fi{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.slide:not(.active) .fi,.slide:not(.active) .fi1,.slide:not(.active) .fi2,.slide:not(.active) .fi3,.slide:not(.active) .fi4,.slide:not(.active) .fi5{animation:none;opacity:0}
+
+/* ── NAV ── */
+.nav-wrap{position:fixed;bottom:max(.65rem,env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);z-index:1000;display:flex;align-items:center;gap:.75rem;background:rgba(7,10,18,0.9);backdrop-filter:blur(20px);border:1px solid var(--border);border-radius:40px;padding:.45rem 1rem;box-shadow:0 8px 32px rgba(0,0,0,.6)}
+.nav-btn{width:32px;height:32px;border-radius:50%;background:var(--surface);border:1px solid var(--border);color:var(--text-h);font-size:.82rem;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s}
+.nav-btn:hover{background:var(--blue-pale)}
+.nav-btn:disabled{opacity:.3;cursor:not-allowed}
+.dots{display:flex;align-items:center;gap:5px}
+.dot{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.2);cursor:pointer;transition:background .25s,transform .25s}
+.dot.on{background:var(--blue-s);transform:scale(1.6)}
+.nav-ct{font-size:.68rem;font-weight:600;color:rgba(255,255,255,.38);min-width:36px;text-align:center;font-variant-numeric:tabular-nums}
+.key-h{font-size:.58rem;color:rgba(255,255,255,.2);padding-left:.7rem;border-left:1px solid var(--border-s)}
+.prog{position:fixed;top:0;left:0;z-index:999;height:2px;background:var(--blue);transition:width .4s var(--ease)}
+
+/* ── PRICING SLIDE ── */
+.pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.1rem; margin-top:1.4rem; align-items:stretch }
+.price-card { border-radius:var(--r-lg); padding:1.6rem 1.5rem; border:1px solid var(--border); background:var(--surface); display:flex; flex-direction:column; gap:0; position:relative; overflow:hidden; transition:border-color .25s,transform .25s }
+.price-card:hover { border-color:rgba(75,111,255,0.4); transform:translateY(-3px) }
+.price-card.featured { background:var(--blue-dim); border-color:rgba(75,111,255,0.35) }
+.price-card.featured::before { content:'Most Popular'; position:absolute; top:.9rem; right:.9rem; font-size:.58rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; background:var(--blue); color:#fff; padding:.2rem .6rem; border-radius:20px }
+.pc-tier { font-size:.6rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:var(--blue-s); margin-bottom:.7rem }
+.pc-price { font-family:var(--serif); font-size:2.4rem; color:var(--text-h); line-height:1; margin-bottom:.15rem }
+.pc-price span { font-family:var(--sans); font-size:.9rem; font-weight:400; color:var(--text-m) }
+.pc-price-range { font-family:var(--serif); font-size:1.6rem; color:var(--text-h); line-height:1; margin-bottom:.15rem }
+.pc-price-range span { font-family:var(--sans); font-size:.82rem; font-weight:400; color:var(--text-m) }
+.pc-volume { font-size:.72rem; color:var(--text-m); margin-bottom:1.1rem; padding-bottom:1rem; border-bottom:1px solid var(--border-s) }
+.pc-volume strong { color:var(--text-b) }
+.pc-features { display:flex; flex-direction:column; gap:.5rem; flex:1 }
+.pc-feat { font-size:.76rem; color:var(--text-b); display:flex; align-items:flex-start; gap:.55rem; line-height:1.5 }
+.pc-feat::before { content:'✓'; color:var(--green); font-weight:700; flex-shrink:0; margin-top:.05rem }
+.pc-cta { margin-top:1.25rem; display:block; text-align:center; background:var(--blue); color:#fff; font-size:.78rem; font-weight:700; padding:.65rem 1rem; border-radius:7px; text-decoration:none; border:none; cursor:pointer; transition:background .2s }
+.pc-cta:hover { background:var(--blue-s) }
+.price-card.featured .pc-cta { background:var(--blue-s) }
+
+/* integration strip */
+.integrations-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:.85rem; margin-top:1.25rem }
+.int-item { background:var(--surface); border:1px solid var(--border); border-radius:var(--r); padding:.9rem 1rem; display:flex; align-items:flex-start; gap:.7rem }
+.int-icon { font-size:1.1rem; flex-shrink:0; margin-top:.05rem }
+.int-item h4 { font-size:.78rem; font-weight:700; color:var(--text-h); margin-bottom:.2rem }
+.int-item p { font-size:.7rem; color:var(--text-m); line-height:1.5 }
+
+/* what's included callout */
+.included-bar { display:flex; flex-wrap:wrap; gap:.5rem; margin-top:1.1rem; padding:1rem 1.2rem; background:var(--surface); border:1px solid var(--border-s); border-radius:var(--r) }
+.incl-tag { font-size:.68rem; font-weight:600; color:var(--text-b); display:flex; align-items:center; gap:.35rem }
+.incl-tag::before { content:'✓'; color:var(--blue-s); font-weight:700 }
+.incl-divider { width:1px; background:var(--border-s); align-self:stretch }
+
+/* light slide overrides */
+.slide.light .ic { background:#fff; border-color:var(--light3) }
+.slide.light .ic:hover { border-color:rgba(36,81,255,0.25); box-shadow:0 6px 24px rgba(36,81,255,0.07) }
+.slide.light .ic h3 { color:var(--text-d) }
+.slide.light .ic p { color:var(--text-d) }
+.slide.light .ic-tag { color:var(--blue) }
+.slide.light .proc-step h3 { color:var(--text-d) }
+.slide.light .proc-step p { color:var(--text-d) }
+.slide.light .proc-n { background:var(--light2); border-color:rgba(36,81,255,0.3) }
+.slide.light .proc-row::before { background:linear-gradient(90deg,transparent,rgba(36,81,255,0.25),rgba(36,81,255,0.25),transparent) }
+.slide.light .proc-cta { background:rgba(36,81,255,0.06); border-color:rgba(36,81,255,0.18) }
+.slide.light .uc { background:#fff; border-color:var(--light3) }
+.slide.light .uc:hover { border-color:rgba(36,81,255,0.25) }
+.slide.light .uc h4 { color:var(--text-d) }
+.slide.light .uc p { color:var(--text-d) }
+.slide.light .uc-cta { background:rgba(36,81,255,0.06); border-color:rgba(36,81,255,0.15) }
+.slide.light .uc-cta p { color:var(--text-d) }
+.slide.light .insight-cta p { color:var(--text-d) }
+.slide.light .proc-cta p { color:var(--text-d) }
+</style>
+</head>
+<body>
+<div class="prog" id="prog"></div>
+<div class="deck" id="deck">
+
+
+<!-- ══ SLIDE 1 — HERO ══ -->
+<div class="slide active" data-index="0">
+  <div class="grid-bg"></div>
+  <div class="orb" style="width:55vw;height:55vw;background:radial-gradient(circle,rgba(36,81,255,0.2),transparent 65%);top:-14vw;right:-10vw"></div>
+  <div class="orb" style="width:38vw;height:38vw;background:radial-gradient(circle,rgba(7,10,18,0.9),transparent 70%);bottom:-8vw;left:-6vw"></div>
+
+  <header class="s-header">
+    <div class="logo-lockup">
+      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
+    </div>
+    <span class="slide-tag">Partner &amp; Reseller Programme</span>
+  </header>
+
+  <div class="s-inner center">
+    <div class="site-badge fi"><div class="pulse"></div> For Accountants, Law Firms &amp; Consultancies</div>
+    <h1 class="ht fi1">Grow Your Firm<br>Without Growing<br><em>Your Team.</em></h1>
+    <p class="lead fi2" style="margin:0 auto;text-align:center;max-width:560px">Unlock new revenue streams through VACEI's structured professional services platform — delivered under your brand or ours. No hiring. No infrastructure. Pure upside.</p>
+    <div class="btn-row center fi3">
+      <a href="https://www.vacei.com/partners" class="btn-p">Become a Partner →</a>
+      <a href="https://www.vacei.com/contact" class="btn-g">Book a Demo</a>
+    </div>
+    <div class="stats fi4">
+      <div class="stat"><strong>10%</strong><span>Recurring commission</span></div>
+      <div class="stat"><strong>2</strong><span>Partnership models</span></div>
+      <div class="stat"><strong>White-label</strong><span>Ready from day one</span></div>
+      <div class="stat"><strong>Zero</strong><span>Operational overhead</span></div>
+    </div>
+  </div>
+
+  <footer class="s-footer"><span>vacei.com/partners</span><span>01 / 11</span></footer>
+</div>
+
+
+<!-- ══ SLIDE 2 — DUAL PORTAL ══ -->
+<div class="slide" data-index="1">
+  <div class="orb" style="width:50vw;height:28vw;top:-7vw;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(36,81,255,0.1),transparent 70%);filter:blur(70px)"></div>
+
+  <header class="s-header">
+    <div class="logo-lockup">
+      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
+    </div>
+    <span class="slide-tag">The Platform</span>
+  </header>
+
+  <div class="s-inner" style="padding-top:.5rem;padding-bottom:.5rem">
+    <p class="eyebrow fi">02 — Dual Portal Structure</p>
+    <h2 class="st fi1">One Connected Environment.<br><span class="accent">Total Control.</span></h2>
+
+    <div class="portal-grid fi2">
+      <div class="portal-card partner">
+        <div class="pc-label blue">Partner Portal — Your Control Centre</div>
+        <h3>What you see &amp; manage</h3>
+        <p class="sub">Your structured workspace for all client activity</p>
+        <div class="pc-items">
+          <div class="pc-item">Manage all client requests in one place</div>
+          <div class="pc-item">Offer new services instantly through VACEI</div>
+          <div class="pc-item">Track delivery, progress and milestones</div>
+          <div class="pc-item">Operate under your brand (white-label ready)</div>
+          <div class="pc-item">Maintain full visibility and control</div>
+          <div class="pc-item">Own the entire client relationship</div>
+        </div>
+      </div>
+      <div class="portal-card client">
+        <div class="pc-label green">Client Portal — Their Experience</div>
+        <h3>What your client sees</h3>
+        <p class="sub">A professional, structured workspace</p>
+        <div class="pc-items">
+          <div class="pc-item">One place to request services and upload documents</div>
+          <div class="pc-item">Real-time visibility on progress and updates</div>
+          <div class="pc-item">Clear, structured communication</div>
+          <div class="pc-item">No fragmented emails or multiple providers</div>
+          <div class="pc-item">Professional, consistent service experience</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="portal-divider fi3"><span>You own the client. We handle the delivery.</span></div>
+  </div>
+
+  <footer class="s-footer"><span>vacei.com/partners</span><span>02 / 11</span></footer>
+</div>
+
+
+<!-- ══ SLIDE 3 — IN-HOUSE BOOKKEEPING DASHBOARD ══ -->
+<div class="slide" data-index="2">
+  <div class="orb" style="width:45vw;height:30vw;top:-8vw;right:-8vw;background:radial-gradient(circle,rgba(34,197,94,0.07),transparent 70%);filter:blur(80px)"></div>
+
+  <header class="s-header">
+    <div class="logo-lockup">
+      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
+    </div>
+    <span class="slide-tag">Live Bookkeeping</span>
+  </header>
+
+  <div class="s-inner split-wide" style="padding-top:.5rem;padding-bottom:.5rem">
+    <div>
+      <p class="eyebrow fi">03 — In-House Bookkeeping</p>
+      <h2 class="st fi1" style="font-size:clamp(1.6rem,2.8vw,2.7rem)">Your clients' books.<br><span class="accent">Always current.</span><br>Always visible.</h2>
+      <p class="lead fi2" style="font-size:.86rem;margin-bottom:1.1rem">VACEI's in-house team manages bookkeeping daily. Your clients log in and see everything — money in, money out, who they owe, who owes them — in one clean workspace.</p>
+
+      <div class="fi3" style="display:flex;flex-direction:column;gap:.65rem">
+        <div style="display:flex;gap:.7rem;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem">
+          <span style="font-size:1rem;flex-shrink:0;margin-top:.05rem">💰</span>
+          <div><strong style="font-size:.82rem;color:var(--text-h);display:block;margin-bottom:.15rem">Money in &amp; money out</strong><p style="font-size:.74rem;color:var(--text-m);line-height:1.5">Every transaction recorded, coded and posted by your VACEI bookkeeper — same day.</p></div>
+        </div>
+        <div style="display:flex;gap:.7rem;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem">
+          <span style="font-size:1rem;flex-shrink:0;margin-top:.05rem">🏦</span>
+          <div><strong style="font-size:.82rem;color:var(--text-h);display:block;margin-bottom:.15rem">Live bank balances</strong><p style="font-size:.74rem;color:var(--text-m);line-height:1.5">All accounts reconciled and visible. No end-of-month surprises.</p></div>
+        </div>
+        <div style="display:flex;gap:.7rem;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem">
+          <span style="font-size:1rem;flex-shrink:0;margin-top:.05rem">📋</span>
+          <div><strong style="font-size:.82rem;color:var(--text-h);display:block;margin-bottom:.15rem">Who owes you &amp; what you owe</strong><p style="font-size:.74rem;color:var(--text-m);line-height:1.5">Receivables and payables tracked with due dates — always clear, always current.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LIVE BOOKKEEPING DASHBOARD -->
+    <div class="fi2">
+      <div class="bk-dash">
+        <div class="bk-topbar">
+          <div class="bk-dot r"></div><div class="bk-dot y"></div><div class="bk-dot g"></div>
+          <div class="bk-url" id="bk-url">portal.vacei.com/bookkeeping</div>
+          <div class="bk-status">Live</div>
+        </div>
+        <div class="bk-tabs">
+          <div class="bk-tab on"  onclick="bkTab('overview',this)">💰 Overview</div>
+          <div class="bk-tab"     onclick="bkTab('flow',this)">📊 Cash Flow</div>
+          <div class="bk-tab"     onclick="bkTab('owed',this)">📋 Who We Owe</div>
+          <div class="bk-tab"     onclick="bkTab('accounts',this)">🏦 Accounts</div>
+        </div>
+        <div class="bk-content">
+
+          <!-- OVERVIEW -->
+          <div class="bk-panel on" id="bk-overview">
+            <p style="font-size:.68rem;color:var(--text-m);margin-bottom:.75rem">Good morning, <strong style="color:var(--text-h)">Acme Holdings Ltd</strong> — April 2025 · Reconciled today 08:32 · <span style="color:var(--green);font-weight:600">All balanced ✓</span></p>
+            <div class="money-cards">
+              <div class="money-card in">
+                <div class="mc-lbl">💰 Money In (MTD)</div>
+                <div class="mc-val">€94,750</div>
+                <div class="mc-sub up">↑ 8% vs last month</div>
+              </div>
+              <div class="money-card out">
+                <div class="mc-lbl">💸 Money Out (MTD)</div>
+                <div class="mc-val">€41,320</div>
+                <div class="mc-sub">Within budget</div>
+              </div>
+              <div class="money-card bal">
+                <div class="mc-lbl">🏦 Bank Balance</div>
+                <div class="mc-val">€142,800</div>
+                <div class="mc-sub">Across 3 accounts</div>
+              </div>
+              <div class="money-card due">
+                <div class="mc-lbl">⏰ Due This Week</div>
+                <div class="mc-val">€8,400</div>
+                <div class="mc-sub am">2 invoices due</div>
+              </div>
+            </div>
+            <div style="background:rgba(255,255,255,.02);border:1px solid var(--border-s);border-radius:8px;padding:.75rem">
+              <div class="mp-title">Recent Transactions</div>
+              <div class="txn-row"><span class="txn-name">Sales Invoice #INV-0412</span><span class="txn-cat">Revenue</span><span class="txn-date">Apr 18</span><span class="txn-amt in">+€18,000</span><span class="txn-badge posted">Posted</span></div>
+              <div class="txn-row"><span class="txn-name">Office Rent — April</span><span class="txn-cat">Overheads</span><span class="txn-date">Apr 17</span><span class="txn-amt out">−€3,200</span><span class="txn-badge posted">Posted</span></div>
+              <div class="txn-row"><span class="txn-name">Payroll Run — Week 2</span><span class="txn-cat">Payroll</span><span class="txn-date">Apr 14</span><span class="txn-amt out">−€12,400</span><span class="txn-badge posted">Posted</span></div>
+              <div class="txn-row"><span class="txn-name">Supplier #SI-0081</span><span class="txn-cat">Purchases</span><span class="txn-date">Apr 18</span><span class="txn-amt out">−€4,750</span><span class="txn-badge pending">Pending</span></div>
+            </div>
+          </div>
+
+          <!-- CASH FLOW -->
+          <div class="bk-panel" id="bk-flow">
+            <p style="font-size:.68rem;color:var(--text-m);margin-bottom:.75rem"><strong style="color:var(--text-h)">Cash Flow</strong> — April 2025 · Net position: <span style="color:var(--green);font-weight:700">+€53,430</span></p>
+            <div class="mini-row">
+              <div class="mini-panel">
+                <div class="mp-title">Monthly Income vs Expenses</div>
+                <div class="bar-chart">
+                  <div class="b inc" style="height:45%"></div><div class="b exp" style="height:30%"></div>
+                  <div class="b inc" style="height:55%"></div><div class="b exp" style="height:38%"></div>
+                  <div class="b inc" style="height:70%"></div><div class="b exp" style="height:42%"></div>
+                  <div class="b inc hl" style="height:85%"></div><div class="b exp" style="height:44%"></div>
+                </div>
+                <div class="bleg" style="display:flex;gap:.75rem"><span style="color:var(--green)">█ Income</span><span style="color:var(--red)">█ Expenses</span></div>
+              </div>
+              <div class="mini-panel">
+                <div class="mp-title">Upcoming Cashflow</div>
+                <div class="txn-row"><span class="txn-name" style="font-size:.68rem">Global Tech Ltd</span><span class="txn-date">Apr 20</span><span class="txn-amt in">+€18,000</span></div>
+                <div class="txn-row"><span class="txn-name" style="font-size:.68rem">Nexus Partners</span><span class="txn-date">Apr 22</span><span class="txn-amt in">+€12,400</span></div>
+                <div class="txn-row"><span class="txn-name" style="font-size:.68rem">Landlord — Q2</span><span class="txn-date">Apr 30</span><span class="txn-amt out">−€9,600</span></div>
+                <div class="txn-row"><span class="txn-name" style="font-size:.68rem">VAT Return Q1</span><span class="txn-date">May 7</span><span class="txn-amt out">−€6,200</span></div>
+              </div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-top:.65rem">
+              <div class="money-card in" style="padding:.7rem"><div class="mc-lbl" style="font-size:.56rem">Total In (April)</div><div class="mc-val" style="font-size:1.1rem">€94,750</div></div>
+              <div class="money-card out" style="padding:.7rem"><div class="mc-lbl" style="font-size:.56rem">Total Out (April)</div><div class="mc-val" style="font-size:1.1rem">€41,320</div></div>
+              <div class="money-card bal" style="padding:.7rem"><div class="mc-lbl" style="font-size:.56rem">Net Profit</div><div class="mc-val" style="font-size:1.1rem;color:var(--green)">€53,430</div></div>
+            </div>
+          </div>
+
+          <!-- WHO WE OWE -->
+          <div class="bk-panel" id="bk-owed">
+            <p style="font-size:.68rem;color:var(--text-m);margin-bottom:.75rem"><strong style="color:var(--text-h)">Receivables &amp; Payables</strong> — <span style="color:var(--green)">€84,200 owed to you</span> · <span style="color:var(--red)">€31,500 you owe</span></p>
+            <div class="owed-grid">
+              <div class="owed-panel">
+                <div class="mp-title" style="color:var(--green)">💰 Owed to You</div>
+                <div class="owed-row"><div><div class="owed-name">Global Tech Ltd</div><div class="owed-due">Inv #0412 · Due Apr 20</div></div><div style="display:flex;align-items:center"><span class="owed-amt in">€18,000</span><span class="owed-status on-track">On track</span></div></div>
+                <div class="owed-row"><div><div class="owed-name">Nexus Partners</div><div class="owed-due">Inv #0398 · Due Apr 22</div></div><div style="display:flex;align-items:center"><span class="owed-amt in">€12,400</span><span class="owed-status on-track">On track</span></div></div>
+                <div class="owed-row"><div><div class="owed-name">Meridian Corp</div><div class="owed-due">Inv #0374 · Due Apr 10</div></div><div style="display:flex;align-items:center"><span class="owed-amt in">€29,800</span><span class="owed-status overdue">Overdue</span></div></div>
+                <div class="owed-row"><div><div class="owed-name">Starlight Media</div><div class="owed-due">Inv #0405 · Due May 1</div></div><div style="display:flex;align-items:center"><span class="owed-amt in">€24,000</span><span class="owed-status on-track">Upcoming</span></div></div>
+              </div>
+              <div class="owed-panel">
+                <div class="mp-title" style="color:var(--red)">📤 You Owe</div>
+                <div class="owed-row"><div><div class="owed-name">Office Landlord</div><div class="owed-due">Rent · Due Apr 30</div></div><div style="display:flex;align-items:center"><span class="owed-amt out">€9,600</span><span class="owed-status due-soon">Due soon</span></div></div>
+                <div class="owed-row"><div><div class="owed-name">Supplier #SI-0081</div><div class="owed-due">Purchases · Due Apr 25</div></div><div style="display:flex;align-items:center"><span class="owed-amt out">€4,750</span><span class="owed-status due-soon">Pending</span></div></div>
+                <div class="owed-row"><div><div class="owed-name">HMRC — VAT Q1</div><div class="owed-due">VAT Return · Due May 7</div></div><div style="display:flex;align-items:center"><span class="owed-amt out">€6,200</span><span class="owed-status on-track">Filed</span></div></div>
+                <div class="owed-row"><div><div class="owed-name">IT Services Ltd</div><div class="owed-due">Subscription · Due May 1</div></div><div style="display:flex;align-items:center"><span class="owed-amt out">€950</span><span class="owed-status on-track">Scheduled</span></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ACCOUNTS -->
+          <div class="bk-panel" id="bk-accounts">
+            <p style="font-size:.68rem;color:var(--text-m);margin-bottom:.75rem"><strong style="color:var(--text-h)">Bank Accounts</strong> — Total position: <span style="color:var(--text-h);font-weight:700">€142,800</span> · Last synced: <span style="color:var(--green)">08:32 today</span></p>
+            <div class="owed-panel" style="margin-bottom:.65rem">
+              <div class="acc-row"><div class="acc-icon" style="background:rgba(36,81,255,0.12)">🏦</div><div><div class="acc-name">Main Current Account</div><div class="acc-bank">Bank of Valletta · **** 4821</div></div><div class="acc-bal">€98,440</div><div class="acc-chg" style="color:var(--green)">↑ €4,200</div></div>
+              <div class="acc-row"><div class="acc-icon" style="background:rgba(34,197,94,0.1)">🏦</div><div><div class="acc-name">Operations Account</div><div class="acc-bank">HSBC Malta · **** 7733</div></div><div class="acc-bal">€31,200</div><div class="acc-chg" style="color:var(--text-m)">Stable</div></div>
+              <div class="acc-row"><div class="acc-icon" style="background:rgba(36,81,255,0.12)">💼</div><div><div class="acc-name">Tax Reserve Account</div><div class="acc-bank">Barclays UK · **** 2290</div></div><div class="acc-bal">€13,160</div><div class="acc-chg" style="color:var(--text-m)">Reserved</div></div>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem">
+              <div class="money-card bal" style="padding:.7rem"><div class="mc-lbl" style="font-size:.56rem">Total Balance</div><div class="mc-val" style="font-size:1.1rem">€142,800</div><div class="mc-sub">3 accounts</div></div>
+              <div class="money-card in"  style="padding:.7rem"><div class="mc-lbl" style="font-size:.56rem">Cash Arriving</div><div class="mc-val" style="font-size:1.1rem">€38,400</div><div class="mc-sub up">Next 7 days</div></div>
+              <div class="money-card due" style="padding:.7rem"><div class="mc-lbl" style="font-size:.56rem">Outgoing</div><div class="mc-val" style="font-size:1.1rem">€21,500</div><div class="mc-sub am">Next 14 days</div></div>
+            </div>
+          </div>
+
+        </div><!-- /bk-content -->
+      </div><!-- /bk-dash -->
+    </div>
+  </div>
+
+  <footer class="s-footer"><span>vacei.com/partners</span><span>03 / 11</span></footer>
+</div>
+
+
+<!-- ══ SLIDE 4 — BOOKKEEPING PRICING ══ -->
+<div class="slide" data-index="3">
+  <div class="orb" style="z-index:0;width:50vw;height:30vw;top:-8vw;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(36,81,255,0.12),transparent 70%);filter:blur(70px)"></div>
+
+  <header class="s-header">
+    <div class="logo-lockup">
+      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
+    </div>
+    <span class="slide-tag">Pricing</span>
+  </header>
+
+  <div class="s-inner content-start" style="padding-bottom:.4rem">
+    <div style="max-width:1200px;width:100%;min-width:0">
+      <p class="eyebrow fi">04 — Bookkeeping &amp; Accounting Pricing</p>
+      <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:0" class="fi1">
+        <h2 class="st" style="margin-bottom:0;font-size:clamp(1.6rem,2.8vw,2.7rem);min-width:0;flex:1 1 16rem">Simple pricing. <span class="accent">Fixed monthly fee.</span></h2>
+        <div style="display:flex;align-items:center;gap:.5rem;background:var(--green-bg);border:1px solid var(--green-bd);border-radius:20px;padding:.3rem .9rem;flex-shrink:0">
+          <div class="pulse"></div>
+          <span style="font-size:.7rem;font-weight:600;color:var(--green)">All plans include real-time portal access</span>
+        </div>
+      </div>
+
+      <!-- WHAT'S ALWAYS INCLUDED -->
+      <div class="included-bar fi2">
+        <div class="incl-tag">Bookkeeping</div>
+        <div class="incl-divider"></div>
+        <div class="incl-tag">Bank reconciliation</div>
+        <div class="incl-divider"></div>
+        <div class="incl-tag">Supplier &amp; debtor entries</div>
+        <div class="incl-divider"></div>
+        <div class="incl-tag">Debtors &amp; creditors</div>
+        <div class="incl-divider"></div>
+        <div class="incl-tag">VAT returns</div>
+        <div class="incl-divider"></div>
+        <div class="incl-tag">Live portal dashboard</div>
+        <div class="incl-divider"></div>
+        <div class="incl-tag">Document requests</div>
+      </div>
+
+      <!-- PRICING CARDS -->
+      <div class="pricing-grid fi2">
+
+        <!-- TIER 1 -->
+        <div class="price-card">
+          <div class="pc-tier">Starter</div>
+          <div class="pc-price">€200<span>/month</span></div>
+          <div class="pc-volume">
+            Up to <strong>100 invoices</strong> &amp; <strong>100 bank transactions</strong> per month
+          </div>
+          <div class="pc-features">
+            <div class="pc-feat">Full bookkeeping &amp; reconciliation</div>
+            <div class="pc-feat">Bank &amp; supplier entries</div>
+            <div class="pc-feat">Debtors &amp; creditors management</div>
+            <div class="pc-feat">Quarterly VAT return preparation</div>
+            <div class="pc-feat">Real-time portal dashboard</div>
+            <div class="pc-feat">QuickBooks or Xero integration</div>
+            <div class="pc-feat">Live bank account connection</div>
+            <div class="pc-feat">Document request &amp; upload centre</div>
+          </div>
+          <a href="https://www.vacei.com/quote" class="pc-cta">Get Started →</a>
+        </div>
+
+        <!-- TIER 2 — FEATURED -->
+        <div class="price-card featured">
+          <div class="pc-tier">Growth</div>
+          <div class="pc-price-range">€350 – €600<span>/month</span></div>
+          <div class="pc-volume">
+            Up to <strong>500 invoices</strong> &amp; <strong>500 transactions</strong> per month
+          </div>
+          <div class="pc-features">
+            <div class="pc-feat">Everything in Starter</div>
+            <div class="pc-feat">Higher volume transaction processing</div>
+            <div class="pc-feat">Monthly management account summary</div>
+            <div class="pc-feat">Real-time income &amp; expense tracking</div>
+            <div class="pc-feat">Cash flow visibility through portal</div>
+            <div class="pc-feat">QuickBooks or Xero — live sync</div>
+            <div class="pc-feat">Live bank feed connection</div>
+            <div class="pc-feat">Priority document turnaround</div>
+          </div>
+          <a href="https://www.vacei.com/quote" class="pc-cta">Get Started →</a>
+        </div>
+
+        <!-- TIER 3 -->
+        <div class="price-card">
+          <div class="pc-tier">Scale</div>
+          <div class="pc-price-range">€700 – €900<span>/month</span></div>
+          <div class="pc-volume">
+            Up to <strong>1,000 invoices</strong> &amp; <strong>1,000 transactions</strong> per month
+          </div>
+          <div class="pc-features">
+            <div class="pc-feat">Everything in Growth</div>
+            <div class="pc-feat">High-volume transaction processing</div>
+            <div class="pc-feat">Full monthly management accounts</div>
+            <div class="pc-feat">P&amp;L, balance sheet &amp; cash flow</div>
+            <div class="pc-feat">Dedicated bookkeeper assigned</div>
+            <div class="pc-feat">Multi-account bank connections</div>
+            <div class="pc-feat">Supplier payment tracking</div>
+            <div class="pc-feat">Custom document workflow setup</div>
+          </div>
+          <a href="https://www.vacei.com/quote" class="pc-cta">Get Started →</a>
+        </div>
+
+      </div><!-- /pricing-grid -->
+
+      <!-- INTEGRATIONS STRIP -->
+      <div class="integrations-strip fi3">
+        <div class="int-item">
+          <div class="int-icon">⚡</div>
+          <div>
+            <h4>QuickBooks &amp; Xero Integration</h4>
+            <p>Real-time sync with your accounting software. Transactions flow directly into your portal — no manual exports, no delays.</p>
+          </div>
+        </div>
+        <div class="int-item">
+          <div class="int-icon">🏦</div>
+          <div>
+            <h4>Live Bank Account Connection</h4>
+            <p>Connect your bank accounts and see every transaction posted and categorised as it happens — all visible in your portal.</p>
+          </div>
+        </div>
+        <div class="int-item">
+          <div class="int-icon">📁</div>
+          <div>
+            <h4>Document Request Centre</h4>
+            <p>VACEI requests what it needs directly through your portal. Upload invoices, receipts and statements — everything tracked and organised.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer class="s-footer"><span>vacei.com/partners</span><span>04 / 11</span></footer>
+</div>
+
+
+<!-- ══ SLIDE 5 — REVENUE ALREADY THERE ══ -->
+<div class="slide light" data-index="4">
+  <header class="s-header">
+    <div class="logo-lockup">
+      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
+    </div>
+    <span class="slide-tag">The Opportunity</span>
+  </header>
+
+  <div class="s-inner">
+    <p class="eyebrow fi">05 — The Revenue Is Already in Your Client Base</p>
+    <h2 class="st fi1">You don't need more clients.<br><span class="accent">Do more for the ones you have.</span></h2>
+    <div class="insight-grid fi2">
+      <div class="ic"><div class="ic-icon">📞</div><span class="ic-tag">First Contact</span><h3>You are their first call</h3><p>Clients come to you when new needs arise. Every request is an opportunity — if you can deliver it.</p></div>
+      <div class="ic"><div class="ic-icon">📈</div><span class="ic-tag">Growing Needs</span><h3>Their requirements grow</h3><p>As their business evolves, they need more. If you can't provide it, another firm will step in.</p></div>
+      <div class="ic"><div class="ic-icon">🔗</div><span class="ic-tag">They Want Simplicity</span><h3>One trusted partner wins</h3><p>Multiple providers create delays and confusion. The firm that handles everything becomes indispensable.</p></div>
+    </div>
+    <div class="insight-cta fi3"><span>👉</span><p>Every unmet request is lost revenue — unless you capture it through VACEI.</p></div>
+  </div>
+
+  <footer class="s-footer"><span>vacei.com/partners</span><span>05 / 11</span></footer>
+</div>
+
+
+<!-- ══ SLIDE 5 — TWO MODELS ══ -->
+<div class="slide" data-index="5">
+  <div class="orb" style="width:45vw;height:45vw;background:radial-gradient(circle,rgba(34,197,94,0.07),transparent 70%);bottom:-12vw;left:-6vw;filter:blur(80px)"></div>
+  <div class="orb" style="width:40vw;height:40vw;background:radial-gradient(circle,rgba(36,81,255,0.1),transparent 70%);top:-10vw;right:-6vw;filter:blur(80px)"></div>
+
+  <header class="s-header">
+    <div class="logo-lockup">
+      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
+    </div>
+    <span class="slide-tag">How to Monetise</span>
+  </header>
+
+  <div class="s-inner" style="padding-top:.5rem;padding-bottom:.5rem">
+    <p class="eyebrow fi">05 — Two Ways to Monetise Immediately</p>
+    <h2 class="st fi1">Choose How You <span class="accent">Want to Grow.</span></h2>
+    <div class="model-grid fi2">
+      <div class="model-card ref">
+        <div class="mc-badge green">Model 1 — Referral</div>
+        <h3>Referral Model</h3>
+        <p class="desc">The simplest path to new revenue. Send the client, we do everything else.</p>
+        <div class="mc-steps">
+          <div class="mc-step"><div class="mc-n">1</div>Send the client to VACEI</div>
+          <div class="mc-step"><div class="mc-n">2</div>We deliver the service in full</div>
+          <div class="mc-step"><div class="mc-n">3</div>You earn 10% recurring commission</div>
+        </div>
+        <div class="mc-ticks">
+          <div class="mc-tick">No workload on your end</div>
+          <div class="mc-tick">No risk or liability</div>
+          <div class="mc-tick">Instant, passive revenue</div>
+        </div>
+        <div class="mc-hl">10% recurring — every month they stay</div>
+      </div>
+      <div class="model-card wl">
+        <div class="mc-badge blue">Model 2 — White-Label</div>
+        <h3>White-Label Model</h3>
+        <p class="desc">Offer VACEI services under your own brand. You invoice. We deliver — behind the scenes.</p>
+        <div class="mc-steps">
+          <div class="mc-step"><div class="mc-n">1</div>Offer the service under your brand</div>
+          <div class="mc-step"><div class="mc-n">2</div>We deliver entirely behind the scenes</div>
+          <div class="mc-step"><div class="mc-n">3</div>You invoice your client at your margin</div>
+        </div>
+        <div class="mc-ticks">
+          <div class="mc-tick">Full control of client relationship</div>
+          <div class="mc-tick">Full margin — you set the price</div>
+          <div class="mc-tick">Stronger positioning with your clients</div>
+        </div>
+        <div class="mc-hl">Your brand. Your price. Our delivery.</div>
+      </div>
+    </div>
+    <p class="fi3" style="text-align:center;font-size:.8rem;color:var(--text-m);margin-top:1.1rem">Start simple with referrals. Scale into white-label as you grow.</p>
+  </div>
+
+  <footer class="s-footer"><span>vacei.com/partners</span><span>06 / 11</span></footer>
+</div>
+
+
+<!-- ══ SLIDE 6 — EXPAND OFFERING ══ -->
+<div class="slide" data-index="6">
+  <div class="orb" style="width:50vw;height:50vw;background:radial-gradient(circle,rgba(36,81,255,0.1),transparent 65%);top:-15vw;right:-12vw;filter:blur(80px)"></div>
+
+  <header class="s-header">
+    <div class="logo-lockup">
+      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
+    </div>
+    <span class="slide-tag">Your New Services</span>
+  </header>
+
+  <div class="s-inner split" style="gap:5vw">
+    <div>
+      <p class="eyebrow fi">06 — Expand Your Offering Instantly</p>
+      <h2 class="st fi1">Offer More Services.<br><span class="accent">Build Nothing.</span></h2>
+      <p class="lead fi2" style="margin-bottom:1.1rem;font-size:.88rem">Give your clients immediate access to VACEI's full structured workspace — bookkeeping, accounting, audit, tax, legal and corporate — all tracked in one platform.</p>
+      <p class="fi2" style="font-size:.66rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-m);margin-bottom:.65rem">Available to offer today:</p>
+      <div class="svc-pills fi2">
+        <div class="svc-pill">📚 In-House Bookkeeping</div>
+        <div class="svc-pill">📑 Accounting</div>
+        <div class="svc-pill">🔍 Audit &amp; Assurance</div>
+        <div class="svc-pill">🧾 Tax Advisory</div>
+        <div class="svc-pill">⚖️ Legal Services</div>
+        <div class="svc-pill">🏢 Corporate Services</div>
+      </div>
+      <div class="fi3" style="background:var(--blue-dim);border:1px solid rgba(36,81,255,0.2);border-radius:var(--r);padding:1rem 1.2rem">
+        <p style="font-size:.82rem;color:var(--text-h);font-weight:600;margin-bottom:.2rem">👉 Real-time financial data through the portal</p>
+        <p style="font-size:.76rem;color:var(--text-m);line-height:1.55">Clients see live bookkeeping, balances, engagements and documents — structured, clear and always current.</p>
+      </div>
+    </div>
+    <div class="fi2">
+      <div class="no-build">
+        <div class="nb"><div class="ico">🚫</div><h4>No Hiring</h4><p>Our qualified in-house team handles all delivery</p></div>
+        <div class="nb"><div class="ico">🏗️</div><h4>No Infrastructure</h4><p>Portal and systems already built — you plug straight in</p></div>
+        <div class="nb"><div class="ico">🔄</div><h4>No Complexity</h4><p>One structured system from request to delivery</p></div>
+      </div>
+      <div style="margin-top:1rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.25rem">
+        <p style="font-size:.62rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--text-m);margin-bottom:.85rem">Everything delivered through one workspace</p>
+        <div style="display:flex;flex-direction:column;gap:.5rem">
+          <div style="display:flex;align-items:center;gap:.65rem;font-size:.78rem;color:var(--text-b)"><span style="color:var(--blue-s)">✓</span> One structured delivery system</div>
+          <div style="display:flex;align-items:center;gap:.65rem;font-size:.78rem;color:var(--text-b)"><span style="color:var(--blue-s)">✓</span> Full progress tracking in your partner portal</div>
+          <div style="display:flex;align-items:center;gap:.65rem;font-size:.78rem;color:var(--text-b)"><span style="color:var(--blue-s)">✓</span> Client-facing portal with live financial data</div>
+          <div style="display:flex;align-items:center;gap:.65rem;font-size:.78rem;color:var(--text-b)"><span style="color:var(--blue-s)">✓</span> Dedicated VACEI team per engagement</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="s-footer"><span>vacei.com/partners</span><span>07 / 11</span></footer>
+</div>
+
+
+<!-- ══ SLIDE 7 — HOW IT WORKS ══ -->
+<div class="slide light" data-index="7">
+  <header class="s-header">
+    <div class="logo-lockup">
+      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
+    </div>
+    <span class="slide-tag">How It Works</span>
+  </header>
+
+  <div class="s-inner">
+    <p class="eyebrow fi">07 — How It Works</p>
+    <h2 class="st fi1">Simple. Controlled. <span class="accent">Scalable.</span></h2>
+    <p style="font-size:.92rem;color:var(--text-d);font-weight:300;line-height:1.7;max-width:520px;margin-bottom:0" class="fi2">Four steps from client request to delivered service — full visibility at every stage through your partner portal.</p>
+    <div class="proc-row fi3">
+      <div class="proc-step"><div class="proc-n">1</div><h3>Client requests a service</h3><p>Through you — via your portal or conversation. You remain their single point of contact.</p></div>
+      <div class="proc-step"><div class="proc-n">2</div><h3>You offer it through VACEI</h3><p>Log the request in your partner portal. Choose referral or white-label — instantly.</p></div>
+      <div class="proc-step"><div class="proc-n">3</div><h3>We deliver behind the scenes</h3><p>VACEI's in-house team picks up and delivers the engagement — you stay fully informed.</p></div>
+      <div class="proc-step"><div class="proc-n">4</div><h3>Everything tracked in one portal</h3><p>Progress, milestones and documents visible to you and your client. No chasing.</p></div>
+    </div>
+    <div class="proc-cta fi4"><p>👉 You stay in control. We do the heavy lifting.</p></div>
+  </div>
+
+  <footer class="s-footer"><span>vacei.com/partners</span><span>08 / 11</span></footer>
+</div>
+
+
+<!-- ══ SLIDE 8 — WHAT THIS MEANS ══ -->
+<div class="slide" data-index="8">
+  <div class="orb" style="width:45vw;height:45vw;background:radial-gradient(circle,rgba(36,81,255,0.1),transparent 70%);top:-8vw;right:-8vw;filter:blur(80px)"></div>
+
+  <header class="s-header">
+    <div class="logo-lockup">
+      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
+    </div>
+    <span class="slide-tag">Impact on Your Firm</span>
+  </header>
+
+  <div class="s-inner split" style="gap:5vw">
+    <div>
+      <p class="eyebrow fi">08 — What This Means for Your Firm</p>
+      <h2 class="st fi1">Turn Every Request<br><span class="accent">Into Revenue.</span></h2>
+      <p class="lead fi2" style="font-size:.88rem">Five direct outcomes for firms that partner with VACEI — each compounding as your client base grows.</p>
+    </div>
+    <div class="fi2">
+      <div class="ben-list">
+        <div class="ben-item"><div class="ben-ico">🎯</div><div class="ben-text"><h4>Capture missed opportunities</h4><p>Stop referring work away. Every service need becomes a revenue event through VACEI.</p></div></div>
+        <div class="ben-item"><div class="ben-ico">💰</div><div class="ben-text"><h4>Increase revenue per client</h4><p>Unlock new income streams from existing relationships — without one new client acquisition.</p></div></div>
+        <div class="ben-item"><div class="ben-ico">🤝</div><div class="ben-text"><h4>Strengthen client positioning</h4><p>Become a broader, more valuable partner. Clients who rely on you for more are harder to lose.</p></div></div>
+        <div class="ben-item"><div class="ben-ico">⚙️</div><div class="ben-text"><h4>Remove operational burden</h4><p>No hiring. No management complexity. VACEI handles delivery — you handle the relationship.</p></div></div>
+        <div class="ben-item"><div class="ben-ico">🔄</div><div class="ben-text"><h4>Build recurring income</h4><p>Generate ongoing monthly revenue from your client base — compounding month over month.</p></div></div>
+      </div>
+      <!-- <div class="ben-cta fi3"><p>👉 Grow faster without increasing overhead</p></div> -->
+    </div>
+  </div>
+
+  <footer class="s-footer"><span>vacei.com/partners</span><span>09 / 11</span></footer>
+</div>
+
+
+<!-- ══ SLIDE 9 — WHERE IT FITS ══ -->
+<div class="slide light" data-index="9">
+  <header class="s-header">
+    <div class="logo-lockup">
+      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
+    </div>
+    <span class="slide-tag">In Practice</span>
+  </header>
+
+  <div class="s-inner">
+    <p class="eyebrow fi">09 — Where This Fits in Practice</p>
+    <h2 class="st fi1">When Do Firms <span class="accent">Use VACEI?</span></h2>
+    <p style="font-size:.92rem;color:var(--text-d);font-weight:300;line-height:1.7;max-width:500px;margin-bottom:0" class="fi2">The moments when a VACEI partnership turns a problem into revenue.</p>
+    <div class="uc-grid fi2">
+      <div class="uc"><div class="uc-ico">🌍</div><div><h4>A client expands internationally</h4><p>Cross-border accounting, tax and compliance — handled through one team, one workspace. You stay the owner.</p></div></div>
+      <div class="uc"><div class="uc-ico">🧾</div><div><h4>Tax or compliance outside your scope</h4><p>Specialist tax advisory needed. VACEI delivers — you retain the engagement and the relationship.</p></div></div>
+      <div class="uc"><div class="uc-ico">🔍</div><div><h4>Audit or legal support required</h4><p>Statutory audit or legal documentation needed. Offer it through VACEI without turning the client away.</p></div></div>
+      <div class="uc"><div class="uc-ico">⚡</div><div><h4>A complex or one-off request arises</h4><p>Unusual requirements outside your day-to-day. VACEI's multi-disciplinary team absorbs them cleanly.</p></div></div>
+      <div class="uc-cta"><span class="arr">👉</span><p>Instead of saying "we don't do this" — you deliver it. Every time.</p></div>
+    </div>
+  </div>
+
+  <footer class="s-footer"><span>vacei.com/partners</span><span>10 / 11</span></footer>
+</div>
+
+
+<!-- ══ SLIDE 10 — CLOSING CTA ══ -->
+<div class="slide" data-index="10">
+  <div class="grid-bg"></div>
+  <div class="orb" style="width:55vw;height:40vw;top:-10vw;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(36,81,255,0.18),transparent 65%);filter:blur(70px)"></div>
+
+  <header class="s-header">
+    <div class="logo-lockup">
+      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
+    </div>
+    <span class="slide-tag">Start Today</span>
+  </header>
+
+  <div class="s-inner center" style="align-items:center">
+    <p class="eyebrow fi" style="justify-content:center">11 — Closing</p>
+    <h2 class="st fi1" style="font-size:clamp(1.9rem,3.8vw,3.6rem)">Stop Leaving Revenue<br><span class="accent">on the Table.</span></h2>
+    <p class="lead fi2" style="margin:0 auto;text-align:center;max-width:500px;font-size:.92rem">Every client request is an opportunity — if you can deliver it. No hiring. No operational complexity. No loss of control.</p>
+
+    <div class="cta-opts fi3">
+      <div class="cta-opt green"><div class="lbl">→ Option 1 — Referral</div><p>Refer a client and earn <strong style="color:var(--green)">10% recurring commission</strong> — instantly, with zero workload on your end.</p></div>
+      <div class="cta-opt blue"><div class="lbl">→ Option 2 — White-Label</div><p>Offer under your brand, invoice at your margin, and <strong style="color:var(--blue-s)">retain full client value</strong> — we deliver behind the scenes.</p></div>
+    </div>
+
+    <div class="fi3" style="padding:.9rem 1.4rem;background:var(--blue-dim);border:1px solid rgba(36,81,255,0.2);border-radius:var(--r);max-width:580px;width:100%;margin-top:0">
+      <p style="font-size:.86rem;color:var(--text-h);font-weight:600;text-align:center">👉 Turn your existing client base into a scalable revenue engine</p>
+    </div>
+
+    <div class="btn-row center fi4">
+      <a href="https://www.vacei.com/partners" class="btn-p">Become a Partner →</a>
+      <a href="https://www.vacei.com/contact" class="btn-g">Book a Demo</a>
+    </div>
+
+    <div class="cta-contact fi5">
+      <a href="tel:+35677142418">📞 +356 7714 2418</a>
+      <a href="tel:+4407400487907">📞 +44 0740 048 7907</a>
+      <a href="mailto:info@vacei.com">✉️ info@vacei.com</a>
+      <span style="font-size:.78rem;color:var(--text-m)">📍 Malta &amp; London</span>
+    </div>
+  </div>
+
+  <footer class="s-footer"><span>© 2026 VACEI — A4 Services Limited</span><span>11 / 11</span></footer>
+</div>
+
+
+</div><!-- /deck -->
+
+<div class="nav-wrap">
+  <button class="nav-btn" id="prev" onclick="go(-1)" disabled>←</button>
+  <div class="dots" id="dots"></div>
+  <button class="nav-btn" id="next" onclick="go(1)">→</button>
+  <div class="nav-ct" id="ctr">1 / 11</div>
+  <div class="key-h">← → keys</div>
+</div>
+
+<script>
+const TOTAL=11;let cur=0,sliding=false;
+const slides=document.querySelectorAll('.slide'),prog=document.getElementById('prog'),ctr=document.getElementById('ctr'),dotsEl=document.getElementById('dots'),prevBtn=document.getElementById('prev'),nextBtn=document.getElementById('next');
+// ensure only the active slide is in the document flow
+slides.forEach((s,i)=>{ s.style.display = i===0 ? 'flex' : 'none'; });
+for(let i=0;i<TOTAL;i++){const d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.addEventListener('click',()=>go(i-cur));dotsEl.appendChild(d)}
+function go(delta){
+  if(sliding)return;
+  const next=cur+delta;
+  if(next<0||next>=TOTAL)return;
+  sliding=true;
+
+  const outgoing=slides[cur];
+  outgoing.classList.remove('active');
+  outgoing.classList.remove('exit-left');
+  outgoing.style.transform='';
+  outgoing.style.display='none';
+
+  cur=next;
+  const incoming=slides[cur];
+  incoming.style.display='flex';
+  incoming.classList.add('active');
+  incoming.classList.remove('exit-left');
+  incoming.style.transform='';
+
+  // reset scroll to top when changing slides
+  window.scrollTo({ top: 0, behavior: 'auto' });
+
+  setTimeout(()=>{sliding=false},120);
+  update();
+}
+function update(){
+  prog.style.width=((cur+1)/TOTAL*100)+'%';ctr.textContent=(cur+1)+' / '+TOTAL;
+  document.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('on',i===cur));
+  prevBtn.disabled=cur===0;nextBtn.disabled=cur===TOTAL-1;
+}
+// bookkeeping tabs
+const BK_URLS={overview:'portal.vacei.com/bookkeeping/overview',flow:'portal.vacei.com/bookkeeping/cashflow',owed:'portal.vacei.com/bookkeeping/payables',accounts:'portal.vacei.com/bookkeeping/accounts'};
+function bkTab(id,el){
+  el.closest('.bk-tabs').querySelectorAll('.bk-tab').forEach(t=>t.classList.remove('on'));
+  el.classList.add('on');
+  el.closest('.bk-dash').querySelectorAll('.bk-panel').forEach(p=>p.classList.remove('on'));
+  document.getElementById('bk-'+id).classList.add('on');
+  const u=el.closest('.bk-dash').querySelector('.bk-url');
+  if(u)u.textContent=BK_URLS[id];
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'||e.key===' '){e.preventDefault();go(1)}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();go(-1)}
+});
+let tx=0;
+document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(dx<0?1:-1)},{passive:true});
+update();
+</script>
+</body>
+</html>

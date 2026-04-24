@@ -45,7 +45,7 @@ html { font-size:16px; scroll-padding-bottom:var(--deck-nav-space); overflow-x:h
 body { font-family:var(--sans); background:var(--bg); overflow-x:hidden; overflow-y:auto; min-height:100vh; min-height:100dvh; width:100%; max-width:100%; -webkit-font-smoothing:antialiased; color:var(--text-h) }
 
 /* ── SLIDE ENGINE ── */
-.deck { position:relative; width:100%; min-width:0; max-width:100%; min-height:100vh; min-height:100dvh; overflow-x:hidden; overflow-y:visible }
+.deck { position:relative; width:100%; min-width:0; max-width:100%; min-height:100vh; min-height:100dvh; overflow-x:hidden; overflow-y:hidden }
 .slide { position:relative; display:none; flex-direction:column; min-height:100vh; min-height:100dvh; min-width:0; max-width:100%; pointer-events:none; overflow:visible; background:var(--bg) }
 .slide.active { display:flex; pointer-events:all; padding-bottom:var(--deck-nav-space) }
 .slide.exit-left { display:flex }
@@ -93,11 +93,22 @@ body { font-family:var(--sans); background:var(--bg); overflow-x:hidden; overflo
 .hero-copy { min-width:0 }
 .hero-copy .lead { max-width:100% }
 .hero-copy h1.ht { max-width:100% }
+.hero-stats {
+  width:100%;
+  justify-content:center;
+  flex-wrap:nowrap;
+  gap:clamp(1rem,2.4vw,2.4rem);
+  grid-column:1 / -1;
+  justify-self:center;
+  max-width:1100px;
+}
+.hero-stats .stat { flex:1 1 0; min-width:0; text-align:center }
 .hero-split { grid-template-columns:30% 70%; gap:clamp(1rem,2.2vw,2.4rem) }
 .s-inner.hero-split {
   max-width:1400px;
   padding-left:clamp(1rem,4vw,5vw);
   padding-right:clamp(1rem,4vw,5vw);
+  padding-top:clamp(.15rem,0.8vh,.45rem);
   align-items:start;
 }
 
@@ -150,7 +161,7 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 .btn-row.center { justify-content:center }
 
 /* ── STAT ROW ── */
-.stats { display:flex; gap:2.5rem; flex-wrap:wrap; margin-top:2.5rem; padding-top:2rem; border-top:1px solid var(--border-s) }
+.stats { display:flex; gap:2.5rem; flex-wrap:wrap; margin-top:-2.5rem; padding-top:2rem; border-top:1px solid var(--border-s) }
 .stat strong { display:block; font-family:var(--serif); font-size:1.85rem; color:var(--text-h); letter-spacing:-.02em }
 .stat span { font-size:.74rem; color:var(--text-m); margin-top:.1rem; display:block }
 
@@ -646,12 +657,13 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
         <a href="https://www.vacei.com/partners" class="btn-p">Become a Partner →</a>
         <a href="https://www.vacei.com/contact" class="btn-g">Book a Demo</a>
       </div>
-      <div class="stats fi4">
-        <div class="stat"><strong>10%</strong><span>Recurring commission</span></div>
-        <div class="stat"><strong>2</strong><span>Partnership models</span></div>
-        <div class="stat"><strong>White-label</strong><span>Ready from day one</span></div>
-        <div class="stat"><strong>Zero</strong><span>Operational overhead</span></div>
-      </div>
+    </div>
+
+    <div class="stats hero-stats fi4">
+      <div class="stat"><strong>10%</strong><span>Recurring commission</span></div>
+      <div class="stat"><strong>2</strong><span>Partnership models</span></div>
+      <div class="stat"><strong>White-label</strong><span>Ready from day one</span></div>
+      <div class="stat"><strong>Zero</strong><span>Operational overhead</span></div>
     </div>
   </div>
 

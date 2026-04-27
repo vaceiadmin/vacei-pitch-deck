@@ -1,37 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
-<title>VACEI — Partner & Reseller Programme</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<!-- saved from url=(0031)https://partner-deck.vacei.com/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>VACEI — Partner &amp; Reseller Programme</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* ─── VACEI BRAND TOKENS (matched to vacei.com) ─── */
+/* ─── VACEI BRAND TOKENS (aligned to vacei.com landing page) ─── */
 :root {
-  --bg:        #070A12;
-  --bg2:       #0C1020;
-  --bg3:       #111827;
+  --bg:        #0F1218;
+  --bg2:       #0A0A0A;
+  --bg3:       #111111;
   --surface:   rgba(255,255,255,0.04);
   --border:    rgba(255,255,255,0.08);
   --border-s:  rgba(255,255,255,0.05);
-  --light:     #F7F6F3;
-  --light2:    #EDECEA;
-  --light3:    #E2E0DC;
-  --blue:      #2451FF;
-  --blue-s:    #4B6FFF;
-  --blue-pale: rgba(36,81,255,0.12);
-  --blue-glow: rgba(36,81,255,0.18);
-  --blue-dim:  rgba(36,81,255,0.08);
+  --light:     #F6F8FF;
+  --light2:    #ECEEF6;
+  --light3:    #DFE2EE;
+  --blue:      #1A4ED8;
+  --blue-s:    #2E5DE8;
+  --blue-pale: rgba(26,78,216,0.12);
+  --blue-glow: rgba(46,93,232,0.18);
+  --blue-dim:  rgba(26,78,216,0.08);
+  --blue-bright:#4F8EF7;
   --text-h:    #FFFFFF;
   --text-b:    #CBD5E0;
-  --text-m:    #8896A8;
-  --text-d:    #4A5568;
-  --green:     #22C55E;
-  --green-bg:  rgba(34,197,94,0.1);
-  --green-bd:  rgba(34,197,94,0.2);
+  --text-m:    #8A90A8;
+  --text-d:    #4A5068;
+  --green:     #059669;
+  --green-bg:  rgba(5,150,105,0.1);
+  --green-bd:  rgba(5,150,105,0.2);
+  --green-mid: #10B981;
   --red:       #F87171;
-  --serif: 'DM Serif Display', Georgia, serif;
-  --sans:  'Sora', system-ui, sans-serif;
+  --serif: 'Inter', system-ui, sans-serif;
+  --sans:  'Inter', system-ui, sans-serif;
   --ease:  cubic-bezier(0.4,0,0.2,1);
   --r:     12px;
   --r-lg:  16px;
@@ -123,7 +125,7 @@ body { font-family:var(--sans); background:var(--bg); overflow-x:hidden; overflo
 .logo-lockup { display:flex; align-items:center; gap:.55rem; flex-shrink:0 }
 .logo-img { height:40px; width:auto; display:block }
 .logo-wm { font-family:var(--sans); font-size:1.1rem; font-weight:800; letter-spacing:.08em; color:var(--text-h) }
-.logo-wm .dot { color:var(--blue) }
+.logo-wm .dot { color:var(--blue-bright) }
 .slide.light .logo-wm { color:var(--text-d) }
 
 /* slide tags — VACEI uses pill badges */
@@ -139,8 +141,8 @@ body { font-family:var(--sans); background:var(--bg); overflow-x:hidden; overflo
 .eyebrow::before { content:''; display:inline-block; width:18px; height:1.5px; background:var(--blue-s) }
 .slide.light .eyebrow { color:var(--blue) }
 .slide.light .eyebrow::before { background:var(--blue) }
-h1.ht { font-family:var(--serif); font-size:clamp(2.6rem,4.8vw,4.5rem); line-height:1.07; letter-spacing:-.01em; color:var(--text-h); margin-bottom:1.2rem; max-width:100%; overflow-wrap:break-word; word-wrap:break-word }
-h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-height:1.1; letter-spacing:-.01em; margin-bottom:.9rem; color:var(--text-h); max-width:100%; overflow-wrap:break-word; word-wrap:break-word }
+h1.ht { font-family:var(--sans); font-size:clamp(2.4rem,4.4vw,4.2rem); font-weight:700; line-height:1.1; letter-spacing:-.025em; color:var(--text-h); margin-bottom:1.2rem; max-width:100%; overflow-wrap:break-word; word-wrap:break-word }
+h2.st { font-family:var(--sans); font-size:clamp(1.7rem,3vw,2.9rem); font-weight:700; line-height:1.1; letter-spacing:-.025em; margin-bottom:.9rem; color:var(--text-h); max-width:100%; overflow-wrap:break-word; word-wrap:break-word }
 .slide.light h2.st { color:var(--text-d) }
 .accent { color:var(--blue-s) }
 .slide.light .accent { color:var(--blue) }
@@ -150,7 +152,7 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 /* ── VACEI BADGE (matches site "Join the Future" pill) ── */
 .site-badge { display:inline-flex; align-items:center; gap:.5rem; border:1px solid var(--border); border-radius:20px; padding:.3rem 1rem; font-size:.72rem; font-weight:500; color:rgba(255,255,255,.55); background:rgba(255,255,255,.03); margin-bottom:1.4rem }
 .pulse { width:7px; height:7px; border-radius:50%; background:var(--green); animation:pulse 2s infinite }
-@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,.4)} 50%{box-shadow:0 0 0 6px rgba(34,197,94,0)} }
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 0 rgba(5,150,105,.4)} 50%{box-shadow:0 0 0 6px rgba(5,150,105,0)} }
 
 /* ── BUTTONS (matches vacei.com CTA style) ── */
 .btn-p { display:inline-flex; align-items:center; gap:.45rem; background:var(--blue); color:#fff; font-family:var(--sans); font-size:.84rem; font-weight:700; padding:.78rem 1.75rem; border-radius:8px; text-decoration:none; border:none; cursor:pointer; transition:background .2s,transform .2s }
@@ -162,7 +164,7 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 
 /* ── STAT ROW ── */
 .stats { display:flex; gap:2.5rem; flex-wrap:wrap; margin-top:-2.5rem; padding-top:2rem; border-top:1px solid var(--border-s) }
-.stat strong { display:block; font-family:var(--serif); font-size:1.85rem; color:var(--text-h); letter-spacing:-.02em }
+.stat strong { display:block; font-family:var(--sans); font-size:1.85rem; font-weight:700; color:var(--text-h); letter-spacing:-.02em }
 .stat span { font-size:.74rem; color:var(--text-m); margin-top:.1rem; display:block }
 
 /* ── WORKSPACE CARD (vacei.com visual language) ── */
@@ -218,7 +220,7 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 .mc-badge { font-size:.58rem; font-weight:700; letter-spacing:.16em; text-transform:uppercase; padding:.22rem .7rem; border-radius:20px; margin-bottom:.9rem; display:inline-block }
 .mc-badge.green { background:var(--green-bg); color:var(--green); border:1px solid var(--green-bd) }
 .mc-badge.blue  { background:var(--blue-pale); color:var(--blue-s); border:1px solid rgba(75,111,255,0.25) }
-.model-card h3 { font-family:var(--serif); font-size:1.25rem; color:var(--text-h); margin-bottom:.3rem; overflow-wrap:break-word; word-wrap:break-word }
+.model-card h3 { font-family:var(--sans); font-size:1.2rem; font-weight:700; color:var(--text-h); margin-bottom:.3rem; overflow-wrap:break-word; word-wrap:break-word }
 .model-card .desc { font-size:.8rem; color:var(--text-m); line-height:1.6; margin-bottom:1.1rem; overflow-wrap:break-word; word-wrap:break-word }
 .mc-steps { display:flex; flex-direction:column; gap:.5rem; margin-bottom:1.1rem }
 .mc-step { display:grid; grid-template-columns:auto minmax(0,1fr); align-items:flex-start; gap:.6rem; font-size:.8rem; color:var(--text-b); line-height:1.5; min-width:0; overflow-wrap:break-word; word-wrap:break-word }
@@ -250,8 +252,8 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 .bk-dot { width:9px; height:9px; border-radius:50% }
 .bk-dot.r{background:#FF5F57} .bk-dot.y{background:#94A3B8} .bk-dot.g{background:#28C840}
 .bk-url { margin-left:.55rem; background:rgba(0,0,0,.3); border-radius:5px; padding:.18rem .75rem; font-size:.66rem; color:var(--text-m); font-family:monospace; flex:1 }
-.bk-status { font-size:.6rem; font-weight:700; color:var(--green); display:flex; align-items:center; gap:.35rem }
-.bk-status::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--green); display:inline-block }
+.bk-status { font-size:.6rem; font-weight:700; color:var(--green-mid); display:flex; align-items:center; gap:.35rem }
+.bk-status::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--green-mid); display:inline-block }
 .bk-tabs { display:flex; background:#0d1120; border-bottom:1px solid var(--border-s) }
 .bk-tab { padding:.55rem .95rem; font-size:.66rem; font-weight:600; letter-spacing:.05em; color:var(--text-m); cursor:pointer; border-bottom:2px solid transparent; transition:color .2s,border-color .2s; white-space:nowrap }
 .bk-tab:hover { color:rgba(255,255,255,.7) }
@@ -269,7 +271,7 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 .money-card.due { background:var(--blue-dim); border-color:rgba(36,81,255,0.22) }
 .money-card:hover { border-color:rgba(75,111,255,0.4) }
 .mc-lbl { font-size:.58rem; text-transform:uppercase; letter-spacing:.1em; color:var(--text-m); margin-bottom:.3rem; display:flex; align-items:center; gap:.4rem }
-.mc-val { font-family:var(--serif); font-size:1.35rem; color:var(--text-h); margin-bottom:.15rem }
+.mc-val { font-family:var(--sans); font-weight:700; font-size:1.35rem; color:var(--text-h); margin-bottom:.15rem }
 .mc-sub { font-size:.62rem; color:var(--text-m) }
 .mc-sub.up { color:var(--green) }
 .mc-sub.dn { color:var(--red) }
@@ -623,28 +625,28 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 </style>
 </head>
 <body>
-<div class="prog" id="prog"></div>
+<div class="prog" id="prog" style="width: 9.09091%;"></div>
 <div class="deck" id="deck">
 
 
 <!-- ══ SLIDE 1 — HERO ══ -->
-<div class="slide active" data-index="0">
+<div class="slide active" data-index="0" style="display: flex;">
   <div class="grid-bg"></div>
   <div class="orb" style="width:55vw;height:55vw;background:radial-gradient(circle,rgba(36,81,255,0.2),transparent 65%);top:-14vw;right:-10vw"></div>
   <div class="orb" style="width:38vw;height:38vw;background:radial-gradient(circle,rgba(7,10,18,0.9),transparent 70%);bottom:-8vw;left:-6vw"></div>
 
   <header class="s-header">
     <div class="logo-lockup">
-      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-      <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
+      <img src="./VACEI — Partner &amp; Reseller Programme_files/Logo.png" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <span class="logo-wm" style="display:none">VACEI<span class="dot on">.</span></span>
     </div>
     <span class="slide-tag">Partner &amp; Reseller Programme</span>
   </header>
 
   <div class="s-inner split hero-split">
     <div class="hero-media fi">
-      <video playsinline preload="metadata" controls>
-        <source src="Reseller_Version_3.mp4" type="video/mp4"/>
+      <video playsinline="" preload="metadata" controls="">
+        <source src="Reseller_Version_3.mp4" type="video/mp4">
         Your browser can’t play this video. Open `Reseller_Version_3.mp4` directly.
       </video>
     </div>
@@ -672,12 +674,12 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 
 
 <!-- ══ SLIDE 2 — DUAL PORTAL ══ -->
-<div class="slide" data-index="1">
+<div class="slide" data-index="1" style="display: none;">
   <div class="orb" style="width:50vw;height:28vw;top:-7vw;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(36,81,255,0.1),transparent 70%);filter:blur(70px)"></div>
 
   <header class="s-header">
     <div class="logo-lockup">
-      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <img src="./VACEI — Partner &amp; Reseller Programme_files/Logo.png" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
     </div>
     <span class="slide-tag">The Platform</span>
@@ -723,12 +725,12 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 
 
 <!-- ══ SLIDE 3 — IN-HOUSE BOOKKEEPING DASHBOARD ══ -->
-<div class="slide" data-index="2">
+<div class="slide" data-index="2" style="display: none;">
   <div class="orb" style="width:45vw;height:30vw;top:-8vw;right:-8vw;background:radial-gradient(circle,rgba(34,197,94,0.07),transparent 70%);filter:blur(80px)"></div>
 
   <header class="s-header">
     <div class="logo-lockup">
-      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <img src="./VACEI — Partner &amp; Reseller Programme_files/Logo.png" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
     </div>
     <span class="slide-tag">Live Bookkeeping</span>
@@ -765,10 +767,10 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
           <div class="bk-status">Live</div>
         </div>
         <div class="bk-tabs">
-          <div class="bk-tab on"  onclick="bkTab('overview',this)">💰 Overview</div>
-          <div class="bk-tab"     onclick="bkTab('flow',this)">📊 Cash Flow</div>
-          <div class="bk-tab"     onclick="bkTab('owed',this)">📋 Who We Owe</div>
-          <div class="bk-tab"     onclick="bkTab('accounts',this)">🏦 Accounts</div>
+          <div class="bk-tab on" onclick="bkTab('overview',this)">💰 Overview</div>
+          <div class="bk-tab" onclick="bkTab('flow',this)">📊 Cash Flow</div>
+          <div class="bk-tab" onclick="bkTab('owed',this)">📋 Who We Owe</div>
+          <div class="bk-tab" onclick="bkTab('accounts',this)">🏦 Accounts</div>
         </div>
         <div class="bk-content">
 
@@ -866,7 +868,7 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
             </div>
             <div class="bk-stat-row" style="display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem">
               <div class="money-card bal" style="padding:.7rem"><div class="mc-lbl" style="font-size:.56rem">Total Balance</div><div class="mc-val" style="font-size:1.1rem">€142,800</div><div class="mc-sub">3 accounts</div></div>
-              <div class="money-card in"  style="padding:.7rem"><div class="mc-lbl" style="font-size:.56rem">Cash Arriving</div><div class="mc-val" style="font-size:1.1rem">€38,400</div><div class="mc-sub up">Next 7 days</div></div>
+              <div class="money-card in" style="padding:.7rem"><div class="mc-lbl" style="font-size:.56rem">Cash Arriving</div><div class="mc-val" style="font-size:1.1rem">€38,400</div><div class="mc-sub up">Next 7 days</div></div>
               <div class="money-card due" style="padding:.7rem"><div class="mc-lbl" style="font-size:.56rem">Outgoing</div><div class="mc-val" style="font-size:1.1rem">€21,500</div><div class="mc-sub am">Next 14 days</div></div>
             </div>
           </div>
@@ -881,133 +883,191 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 
 
 <!-- ══ SLIDE 4 — BOOKKEEPING PRICING ══ -->
-<div class="slide" data-index="3">
-  <div class="orb" style="z-index:0;width:50vw;height:30vw;top:-8vw;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(36,81,255,0.12),transparent 70%);filter:blur(70px)"></div>
+<style>
+/* ── 4-COLUMN PRICING GRID (slide-specific) ── */
+.pricing-grid-4 {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:.85rem;
+  margin-top:1rem;
+  align-items:stretch;
+}
+.price-card-4 {
+  border-radius:var(--r-lg);
+  padding:1.35rem 1.2rem;
+  border:1px solid var(--border);
+  background:var(--surface);
+  display:flex;
+  flex-direction:column;
+  position:relative;
+  overflow:hidden;
+  min-width:0;
+  transition:border-color .25s,transform .25s;
+}
+.price-card-4:hover { border-color:rgba(46,93,232,0.4); transform:translateY(-3px) }
+.price-card-4.featured {
+  background:rgba(26,78,216,0.1);
+  border-color:rgba(46,93,232,0.4);
+}
+.price-card-4.featured::after {
+  content:'Most Popular';
+  position:absolute; top:.85rem; right:.85rem;
+  font-size:.55rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase;
+  background:var(--blue-s); color:#fff;
+  padding:.2rem .55rem; border-radius:20px;
+}
+.pc4-tier {
+  font-size:.58rem; font-weight:700; letter-spacing:.18em; text-transform:uppercase;
+  color:var(--blue-bright); margin-bottom:.55rem;
+}
+.pc4-price {
+  font-family:var(--sans); font-size:1.55rem; font-weight:700; color:var(--text-h);
+  letter-spacing:-.02em; line-height:1; margin-bottom:.15rem;
+}
+.pc4-price sub { font-size:.72rem; font-weight:400; color:var(--text-m); letter-spacing:0 }
+.pc4-pos {
+  font-size:.7rem; color:var(--text-m); line-height:1.45;
+  margin-bottom:.85rem; padding-bottom:.85rem; border-bottom:1px solid var(--border-s);
+}
+.pc4-feats { display:flex; flex-direction:column; gap:.42rem; flex:1 }
+.pc4-feat {
+  font-size:.72rem; color:var(--text-b);
+  display:flex; align-items:flex-start; gap:.45rem; line-height:1.45;
+}
+.pc4-feat::before { content:'✓'; color:var(--green-mid); font-weight:700; flex-shrink:0; margin-top:.05rem }
+.pc4-cta {
+  margin-top:1rem; display:block; text-align:center;
+  background:var(--blue-s); color:#fff;
+  font-size:.74rem; font-weight:700; padding:.58rem .9rem;
+  border-radius:7px; text-decoration:none; border:none; cursor:pointer;
+  transition:background .2s;
+}
+.pc4-cta:hover { background:var(--blue) }
+.price-card-4.featured .pc4-cta { background:var(--blue-bright) }
+.price-card-4.featured .pc4-cta:hover { background:var(--blue-s) }
+@media (max-width:900px) {
+  .pricing-grid-4 { grid-template-columns:repeat(2,1fr); gap:.85rem }
+}
+@media (max-width:580px) {
+  .pricing-grid-4 { grid-template-columns:1fr }
+}
+</style>
+
+<div class="slide" data-index="3" style="display: none;">
+  <div class="orb" style="z-index:0;width:50vw;height:30vw;top:-8vw;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(26,78,216,0.12),transparent 70%);filter:blur(70px)"></div>
 
   <header class="s-header">
     <div class="logo-lockup">
-      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <img src="./VACEI — Partner &amp; Reseller Programme_files/Logo.png" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
     </div>
     <span class="slide-tag">Pricing</span>
   </header>
 
   <div class="s-inner content-start" style="padding-bottom:.4rem">
-    <div style="max-width:1200px;width:100%;min-width:0">
-      <p class="eyebrow fi">04 — Bookkeeping &amp; Accounting Pricing</p>
+    <div style="max-width:1280px;width:100%;min-width:0">
+      <p class="eyebrow fi">04 — Bookkeeping &amp; Accounting Packages</p>
       <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:.75rem;margin-bottom:0" class="fi1">
-        <h2 class="st" style="margin-bottom:0;font-size:clamp(1.6rem,2.8vw,2.7rem);min-width:0;flex:1 1 16rem">Simple pricing. <span class="accent">Fixed monthly fee.</span></h2>
+        <h2 class="st" style="margin-bottom:0;font-size:clamp(1.5rem,2.6vw,2.5rem);min-width:0;flex:1 1 16rem">Choose the right level <span class="accent">of support.</span></h2>
         <div style="display:flex;align-items:center;gap:.5rem;background:var(--green-bg);border:1px solid var(--green-bd);border-radius:20px;padding:.3rem .9rem;flex-shrink:0">
           <div class="pulse"></div>
-          <span style="font-size:.7rem;font-weight:600;color:var(--green)">All plans include real-time portal access</span>
+          <span style="font-size:.68rem;font-weight:600;color:var(--green-mid)">All packages include real-time portal access</span>
         </div>
       </div>
 
-      <!-- WHAT'S ALWAYS INCLUDED -->
-      <div class="included-bar fi2">
-        <div class="incl-tag">Bookkeeping</div>
+      <!-- ALWAYS INCLUDED -->
+      <div class="included-bar fi2" style="margin-top:.85rem">
+        <div class="incl-tag">Invoice &amp; receipt processing</div>
         <div class="incl-divider"></div>
         <div class="incl-tag">Bank reconciliation</div>
         <div class="incl-divider"></div>
         <div class="incl-tag">Supplier &amp; debtor entries</div>
         <div class="incl-divider"></div>
-        <div class="incl-tag">Debtors &amp; creditors</div>
-        <div class="incl-divider"></div>
-        <div class="incl-tag">VAT returns</div>
+        <div class="incl-tag">VAT preparation support</div>
         <div class="incl-divider"></div>
         <div class="incl-tag">Live portal dashboard</div>
         <div class="incl-divider"></div>
-        <div class="incl-tag">Document requests</div>
+        <div class="incl-tag">Document upload centre</div>
       </div>
 
-      <!-- PRICING CARDS -->
-      <div class="pricing-grid fi2">
+      <!-- 4-PACKAGE PRICING GRID -->
+      <div class="pricing-grid-4 fi2">
 
-        <!-- TIER 1 -->
-        <div class="price-card">
-          <div class="pc-tier">Starter</div>
-          <div class="pc-price">€200<span>/month</span></div>
-          <div class="pc-volume">
-            Up to <strong>100 invoices</strong> &amp; <strong>100 bank transactions</strong> per month
+        <!-- PACKAGE 1 — Bookkeeping Essentials -->
+        <div class="price-card-4">
+          <div class="pc4-tier">Bookkeeping Essentials</div>
+          <div class="pc4-price">€350<sub>/month</sub></div>
+          <div class="pc4-pos">Records processed and maintained</div>
+          <div class="pc4-feats">
+            <div class="pc4-feat">Invoice and receipt processing</div>
+            <div class="pc4-feat">Sales and purchase entries</div>
+            <div class="pc4-feat">Bank transaction posting</div>
+            <div class="pc4-feat">Document upload centre</div>
+            <div class="pc4-feat">Portal access</div>
+            <div class="pc4-feat">Monthly bookkeeping update</div>
           </div>
-          <div class="pc-features">
-            <div class="pc-feat">Full bookkeeping &amp; reconciliation</div>
-            <div class="pc-feat">Bank &amp; supplier entries</div>
-            <div class="pc-feat">Debtors &amp; creditors management</div>
-            <div class="pc-feat">Quarterly VAT return preparation</div>
-            <div class="pc-feat">Real-time portal dashboard</div>
-            <div class="pc-feat">QuickBooks or Xero integration</div>
-            <div class="pc-feat">Live bank account connection</div>
-            <div class="pc-feat">Document request &amp; upload centre</div>
-          </div>
-          <a href="https://www.vacei.com/quote" class="pc-cta">Get Started →</a>
+          <a href="https://www.vacei.com" class="pc4-cta">Get Started →</a>
         </div>
 
-        <!-- TIER 2 — FEATURED -->
-        <div class="price-card featured">
-          <div class="pc-tier">Growth</div>
-          <div class="pc-price-range">€350 – €600<span>/month</span></div>
-          <div class="pc-volume">
-            Up to <strong>500 invoices</strong> &amp; <strong>500 transactions</strong> per month
+        <!-- PACKAGE 2 — Core Accounting (FEATURED) -->
+        <div class="price-card-4 featured">
+          <div class="pc4-tier">Core Accounting</div>
+          <div class="pc4-price">€700<sub>/month</sub></div>
+          <div class="pc4-pos">Reconciled accounts + dashboard visibility</div>
+          <div class="pc4-feats">
+            <div class="pc4-feat">Everything in Essentials</div>
+            <div class="pc4-feat">Bank reconciliations</div>
+            <div class="pc4-feat">Supplier reconciliations</div>
+            <div class="pc4-feat">Debtor and creditor review</div>
+            <div class="pc4-feat">VAT preparation support</div>
+            <div class="pc4-feat">Live bank feed connection</div>
+            <div class="pc4-feat">Real-time dashboard</div>
+            <div class="pc4-feat">Monthly balance review</div>
           </div>
-          <div class="pc-features">
-            <div class="pc-feat">Everything in Starter</div>
-            <div class="pc-feat">Higher volume transaction processing</div>
-            <div class="pc-feat">Monthly management account summary</div>
-            <div class="pc-feat">Real-time income &amp; expense tracking</div>
-            <div class="pc-feat">Cash flow visibility through portal</div>
-            <div class="pc-feat">QuickBooks or Xero — live sync</div>
-            <div class="pc-feat">Live bank feed connection</div>
-            <div class="pc-feat">Priority document turnaround</div>
-          </div>
-          <a href="https://www.vacei.com/quote" class="pc-cta">Get Started →</a>
+          <a href="https://www.vacei.com/quote" class="pc4-cta">Request a Quote →</a>
         </div>
 
-        <!-- TIER 3 -->
-        <div class="price-card">
-          <div class="pc-tier">Scale</div>
-          <div class="pc-price-range">€700 – €900<span>/month</span></div>
-          <div class="pc-volume">
-            Up to <strong>1,000 invoices</strong> &amp; <strong>1,000 transactions</strong> per month
+        <!-- PACKAGE 3 — Management Accounts -->
+        <div class="price-card-4">
+          <div class="pc4-tier">Management Accounts</div>
+          <div class="pc4-price">€950<sub>/month</sub></div>
+          <div class="pc4-pos">Monthly reporting and financial insight</div>
+          <div class="pc4-feats">
+            <div class="pc4-feat">Everything in Core Accounting</div>
+            <div class="pc4-feat">Monthly management accounts</div>
+            <div class="pc4-feat">Profit &amp; loss review</div>
+            <div class="pc4-feat">Balance sheet review</div>
+            <div class="pc4-feat">Cash flow visibility</div>
+            <div class="pc4-feat">VAT position review</div>
+            <div class="pc4-feat">Monthly summary reporting</div>
+            <div class="pc4-feat">Ongoing finance team support</div>
           </div>
-          <div class="pc-features">
-            <div class="pc-feat">Everything in Growth</div>
-            <div class="pc-feat">High-volume transaction processing</div>
-            <div class="pc-feat">Full monthly management accounts</div>
-            <div class="pc-feat">P&amp;L, balance sheet &amp; cash flow</div>
-            <div class="pc-feat">Dedicated bookkeeper assigned</div>
-            <div class="pc-feat">Multi-account bank connections</div>
-            <div class="pc-feat">Supplier payment tracking</div>
-            <div class="pc-feat">Custom document workflow setup</div>
-          </div>
-          <a href="https://www.vacei.com/quote" class="pc-cta">Get Started →</a>
+          <a href="https://www.vacei.com/quote" class="pc4-cta">Request a Quote →</a>
         </div>
 
-      </div><!-- /pricing-grid -->
+        <!-- PACKAGE 4 — Managed Finance Function -->
+        <div class="price-card-4">
+          <div class="pc4-tier">Managed Finance Function</div>
+          <div class="pc4-price">€1,800<sub>/month</sub></div>
+          <div class="pc4-pos">Outsourced finance department</div>
+          <div class="pc4-feats">
+            <div class="pc4-feat">Everything in Management Accounts</div>
+            <div class="pc4-feat">Dedicated finance contact</div>
+            <div class="pc4-feat">Full monthly reporting pack</div>
+            <div class="pc4-feat">P&amp;L, balance sheet &amp; cash flow</div>
+            <div class="pc4-feat">Supplier payment tracking</div>
+            <div class="pc4-feat">Debtor follow-up support</div>
+            <div class="pc4-feat">Budget vs actual review</div>
+            <div class="pc4-feat">CFO-level support available</div>
+          </div>
+          <a href="https://www.vacei.com/contact" class="pc4-cta">Speak to Our Team →</a>
+        </div>
 
-      <!-- INTEGRATIONS STRIP -->
-      <div class="integrations-strip fi3">
-        <div class="int-item">
-          <div class="int-icon">⚡</div>
-          <div>
-            <h4>QuickBooks &amp; Xero Integration</h4>
-            <p>Real-time sync with your accounting software. Transactions flow directly into your portal — no manual exports, no delays.</p>
-          </div>
-        </div>
-        <div class="int-item">
-          <div class="int-icon">🏦</div>
-          <div>
-            <h4>Live Bank Account Connection</h4>
-            <p>Connect your bank accounts and see every transaction posted and categorised as it happens — all visible in your portal.</p>
-          </div>
-        </div>
-        <div class="int-item">
-          <div class="int-icon">📁</div>
-          <div>
-            <h4>Document Request Centre</h4>
-            <p>VACEI requests what it needs directly through your portal. Upload invoices, receipts and statements — everything tracked and organised.</p>
-          </div>
-        </div>
+      </div><!-- /pricing-grid-4 -->
+
+      <!-- DISCLAIMER NOTE -->
+      <div class="fi3" style="margin-top:.85rem;padding:.75rem 1rem;background:var(--surface);border:1px solid var(--border-s);border-radius:var(--r);font-size:.68rem;color:var(--text-m);line-height:1.55">
+        Final pricing depends on transaction volume, number of bank accounts, VAT complexity, payroll, catch-up work, and reporting requirements. For Malta clients, VACEI is supported by <strong style="color:var(--text-b)">A4 Services</strong>, an established audit and accounting firm in Malta.
       </div>
 
     </div>
@@ -1018,10 +1078,10 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 
 
 <!-- ══ SLIDE 5 — REVENUE ALREADY THERE ══ -->
-<div class="slide light" data-index="4">
+<div class="slide light" data-index="4" style="display: none;">
   <header class="s-header">
     <div class="logo-lockup">
-      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <img src="./VACEI — Partner &amp; Reseller Programme_files/Logo.png" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
     </div>
     <span class="slide-tag">The Opportunity</span>
@@ -1043,13 +1103,13 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 
 
 <!-- ══ SLIDE 5 — TWO MODELS ══ -->
-<div class="slide" data-index="5">
+<div class="slide" data-index="5" style="display: none;">
   <div class="orb" style="width:45vw;height:45vw;background:radial-gradient(circle,rgba(34,197,94,0.07),transparent 70%);bottom:-12vw;left:-6vw;filter:blur(80px)"></div>
   <div class="orb" style="width:40vw;height:40vw;background:radial-gradient(circle,rgba(36,81,255,0.1),transparent 70%);top:-10vw;right:-6vw;filter:blur(80px)"></div>
 
   <header class="s-header">
     <div class="logo-lockup">
-      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <img src="./VACEI — Partner &amp; Reseller Programme_files/Logo.png" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
     </div>
     <span class="slide-tag">How to Monetise</span>
@@ -1100,12 +1160,12 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 
 
 <!-- ══ SLIDE 6 — EXPAND OFFERING ══ -->
-<div class="slide" data-index="6">
+<div class="slide" data-index="6" style="display: none;">
   <div class="orb" style="width:50vw;height:50vw;background:radial-gradient(circle,rgba(36,81,255,0.1),transparent 65%);top:-15vw;right:-12vw;filter:blur(80px)"></div>
 
   <header class="s-header">
     <div class="logo-lockup">
-      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <img src="./VACEI — Partner &amp; Reseller Programme_files/Logo.png" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
     </div>
     <span class="slide-tag">Your New Services</span>
@@ -1153,10 +1213,10 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 
 
 <!-- ══ SLIDE 7 — HOW IT WORKS ══ -->
-<div class="slide light" data-index="7">
+<div class="slide light" data-index="7" style="display: none;">
   <header class="s-header">
     <div class="logo-lockup">
-      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <img src="./VACEI — Partner &amp; Reseller Programme_files/Logo.png" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
     </div>
     <span class="slide-tag">How It Works</span>
@@ -1180,12 +1240,12 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 
 
 <!-- ══ SLIDE 8 — WHAT THIS MEANS ══ -->
-<div class="slide" data-index="8">
+<div class="slide" data-index="8" style="display: none;">
   <div class="orb" style="width:45vw;height:45vw;background:radial-gradient(circle,rgba(36,81,255,0.1),transparent 70%);top:-8vw;right:-8vw;filter:blur(80px)"></div>
 
   <header class="s-header">
     <div class="logo-lockup">
-      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <img src="./VACEI — Partner &amp; Reseller Programme_files/Logo.png" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
     </div>
     <span class="slide-tag">Impact on Your Firm</span>
@@ -1214,10 +1274,10 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 
 
 <!-- ══ SLIDE 9 — WHERE IT FITS ══ -->
-<div class="slide light" data-index="9">
+<div class="slide light" data-index="9" style="display: none;">
   <header class="s-header">
     <div class="logo-lockup">
-      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <img src="./VACEI — Partner &amp; Reseller Programme_files/Logo.png" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
     </div>
     <span class="slide-tag">In Practice</span>
@@ -1241,13 +1301,13 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 
 
 <!-- ══ SLIDE 10 — CLOSING CTA ══ -->
-<div class="slide" data-index="10">
+<div class="slide" data-index="10" style="display: none;">
   <div class="grid-bg"></div>
   <div class="orb" style="width:55vw;height:40vw;top:-10vw;left:50%;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(36,81,255,0.18),transparent 65%);filter:blur(70px)"></div>
 
   <header class="s-header">
     <div class="logo-lockup">
-      <img src="https://www.vacei.com/_next/image?url=%2Fassets%2Fimages%2FLogo.png&w=256&q=75" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+      <img src="./VACEI — Partner &amp; Reseller Programme_files/Logo.png" class="logo-img" alt="VACEI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
       <span class="logo-wm" style="display:none">VACEI<span class="dot">.</span></span>
     </div>
     <span class="slide-tag">Start Today</span>
@@ -1287,8 +1347,8 @@ h2.st { font-family:var(--serif); font-size:clamp(1.8rem,3.2vw,3.1rem); line-hei
 </div><!-- /deck -->
 
 <div class="nav-wrap">
-  <button class="nav-btn" id="prev" onclick="go(-1)" disabled>←</button>
-  <div class="dots" id="dots"></div>
+  <button class="nav-btn" id="prev" onclick="go(-1)" disabled="">←</button>
+  <div class="dots" id="dots"><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div>
   <button class="nav-btn" id="next" onclick="go(1)">→</button>
   <div class="nav-ct" id="ctr">1 / 11</div>
   <div class="key-h">← → keys</div>
@@ -1349,5 +1409,254 @@ document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:tru
 document.addEventListener('touchend',e=>{const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)go(dx<0?1:-1)},{passive:true});
 update();
 </script>
-</body>
-</html>
+
+
+<div id="screenity-ui"><div class="screenity-shadow-dom"><div><div class="screenity-scrollbar"></div><div class="screenity-scrollbar"></div></div><style type="text/css">
+			#screenity-ui, #screenity-ui div {
+				background-color: unset;
+				padding: unset;
+				width: unset;
+				box-shadow: unset;
+				display: unset;
+				margin: unset;
+				border-radius: unset;
+			}
+			.screenity-outline {
+				position: absolute;
+				z-index: 99999999999;
+				border: 2px solid #0F877B;
+				outline-offset: -2px;
+				pointer-events: none;
+				border-radius: 5px!important;
+			}
+		.screenity-blur {
+			filter: blur(10px)!important;
+		}
+			.screenity-shadow-dom * {
+				transition: unset;
+			}
+			.screenity-shadow-dom .TooltipContent {
+  border-radius: 8px!important;
+	background-color: #29292F!important;
+  padding: 10px 15px!important;
+  font-size: 12px;
+	margin-bottom: 10px!important;
+	bottom: 100px;
+  line-height: 1;
+	font-family: 'Inter-Medium', sans-serif;
+	z-index: 99999999!important;
+  color: #FFF;
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px!important;
+  user-select: none;
+	transition: opacity 0.3 ease-in-out;
+  will-change: transform, opacity;
+	animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+
+.screenity-shadow-dom .hide-tooltip {
+	display: none!important;
+}
+
+.screenity-shadow-dom .tooltip-tall {
+	margin-bottom: 20px;
+}
+
+.screenity-shadow-dom .tooltip-small {
+	margin-bottom: 5px;
+}
+
+.screenity-shadow-dom .TooltipContent[data-state='delayed-open'][data-side='top'] {
+	animation-name: slideDownAndFade;
+}
+.screenity-shadow-dom .TooltipContent[data-state='delayed-open'][data-side='right'] {
+  animation-name: slideLeftAndFade;
+}
+.screenity-shadow-dom.TooltipContent[data-state='delayed-open'][data-side='bottom'] {
+  animation-name: slideUpAndFade;
+}
+.screenity-shadow-dom.TooltipContent[data-state='delayed-open'][data-side='left'] {
+  animation-name: slideRightAndFade;
+}
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeftAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+#screenity-ui [data-radix-popper-content-wrapper] { z-index: 999999999999!important; } 
+
+.screenity-shadow-dom .CanvasContainer {
+	position: fixed;
+	pointer-events: all!important;
+	top: 0px!important;
+	left: 0px!important;
+	z-index: 99999999999!important;
+}
+.screenity-shadow-dom .canvas {
+	position: fixed;
+	top: 0px!important;
+	left: 0px!important;
+	z-index: 99999999999!important;
+	background: transparent!important;
+}
+.screenity-shadow-dom .canvas-container {
+	top: 0px!important;
+	left: 0px!important;
+	z-index: 99999999999;
+	position: fixed!important;
+	background: transparent!important;
+}
+
+.ScreenityDropdownMenuContent {
+	z-index: 99999999999!important;
+  min-width: 200px;
+  background-color: white;
+  margin-top: 4px;
+  margin-right: 8px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border-radius: 15px;
+  z-index: 99999;
+  font-family: 'Inter-Medium', sans-serif;
+  color: #29292F;
+  box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35),
+    0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+}
+.ScreenityDropdownMenuContent[data-side="top"] {
+  animation-name: slideDownAndFade;
+}
+.ScreenityDropdownMenuContent[data-side="right"] {
+  animation-name: slideLeftAndFade;
+}
+.ScreenityDropdownMenuContent[data-side="bottom"] {
+  animation-name: slideUpAndFade;
+}
+.ScreenityDropdownMenuContent[data-side="left"] {
+  animation-name: slideRightAndFade;
+}
+.ScreenityItemIndicator {
+  position: absolute;
+  right: 12px; 
+  width: 18px;
+  height: 18px;
+  background: #0F877B;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.ScreenityDropdownMenuItem,
+.ScreenityDropdownMenuRadioItem {
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 5px;
+  position: relative;
+  padding-left: 22px;
+  padding-right: 22px;
+  user-select: none;
+  outline: none;
+}
+.ScreenityDropdownMenuItem:hover {
+    background-color: #F6F7FB !important;
+    cursor: pointer;
+}
+.ScreenityDropdownMenuItem[data-disabled] {
+  color: #6E7684 !important;
+  cursor: not-allowed;
+  background-color: #F6F7FB !important;
+}
+
+
+
+@keyframes slideUpAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideRightAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideDownAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideLeftAndFade {
+  from {
+    opacity: 0;
+    transform: translateX(2px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+</style></div></div></body></html>
